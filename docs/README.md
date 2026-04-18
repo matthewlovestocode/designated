@@ -7,6 +7,7 @@ want to learn about.
 
 ## Sections
 
+- [Spec](./spec.md): the basic intent and early product direction for the app.
 - [Web App](./web/README.md): beginner-friendly notes about the Next.js app in
   `apps/web`.
 

@@ -1,5 +1,8 @@
 # Designated
 
+Designated is intended to be an app for designated drivers to discover bars and
+see whether those bars currently have patrons seeking a designated driver.
+
 This repository is an `npm` monorepo with a Next.js app inside `apps/web`.
 
 ## Structure
@@ -60,3 +63,4 @@ From the repository root:
 - Add shared libraries or utilities under `packages/`.
 - The Next.js app uses the App Router.
 - Beginner-friendly documentation lives in `docs/`.
+- A lightweight product spec lives in `docs/spec.md`.
