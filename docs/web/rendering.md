@@ -29,7 +29,8 @@ It sees:
 
 - `layout.tsx`, which wraps the app
 - `page.tsx`, which defines the homepage
-- `globals.css`, which styles the page
+- `globals.css`, which provides a small reset
+- `components/page-header.tsx`, which supplies the heading UI
 
 ## Step 3: React Creates The UI
 
@@ -53,7 +54,8 @@ The flow is especially simple:
 
 1. `layout.tsx` defines the outer document structure.
 2. `page.tsx` defines the homepage content.
-3. `globals.css` styles the content.
+3. `page-header.tsx` renders the heading inside the homepage.
+4. `globals.css` applies a small set of global reset defaults.
 
 That makes this a good beginner project because there are only a few moving
 parts to learn first.
@@ -64,8 +66,10 @@ parts to learn first.
 flowchart TD
     A["layout.tsx"] --> B["Wraps every page"]
     C["page.tsx"] --> D["Homepage content"]
-    E["globals.css"] --> F["Global styles"]
-    B --> G["Final page"]
-    D --> G
-    F --> G
+    E["page-header.tsx"] --> F["Heading UI"]
+    G["globals.css"] --> H["Reset defaults"]
+    B --> I["Final page"]
+    D --> I
+    F --> I
+    H --> I
 ```

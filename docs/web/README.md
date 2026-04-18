@@ -9,7 +9,10 @@ explain what each file is responsible for.
 
 - [Overview](./overview.md): what the web app is and how it fits into the
   monorepo.
-- [File Guide](./files.md): what the important files and folders do.
+- [File Guide](./files.md): what every current file and folder in `apps/web`
+  is for.
+- [Routing Guide](./routing.md): how Next.js App Router maps URLs to folders
+  and files.
 - [How Rendering Works](./rendering.md): a simple explanation of how the app
   gets turned into a webpage.
 
@@ -26,7 +29,9 @@ If you are new to this repository, this is the simplest way to think about it:
 flowchart TD
     A["Repository Root"] --> B["apps/web"]
     A --> C["packages/"]
+    B --> G[".next/"]
     B --> D["app/layout.tsx"]
     B --> E["app/page.tsx"]
     B --> F["app/globals.css"]
+    B --> H["routing.md explains URL mapping"]
 ```

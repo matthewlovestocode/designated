@@ -34,10 +34,12 @@ At the moment, the app is a small starter site. It includes:
 
 - a root layout
 - a home page
-- a global stylesheet
+- a small reusable component
+- a global stylesheet with only reset defaults
 - TypeScript configuration
 - Next.js configuration
 - ESLint configuration
+- generated build output in `.next/` after you run the app or build it
 
 This gives you a solid starting point without a lot of extra complexity.
 
@@ -57,14 +59,16 @@ If you want to learn this project step by step, read the files in this order:
 1. `apps/web/package.json`
 2. `apps/web/app/layout.tsx`
 3. `apps/web/app/page.tsx`
-4. `apps/web/app/globals.css`
+4. `apps/web/app/components/page-header.tsx`
+5. `apps/web/app/globals.css`
 
 That path helps you see:
 
 - how the app is configured
 - how the page is wrapped
 - what the homepage renders
-- how the page is styled
+- how the reusable heading component works
+- which global defaults exist across the app
 
 ## Visual Learning Map
 
@@ -73,5 +77,27 @@ flowchart LR
     A["apps/web/package.json"] --> B["How the app runs"]
     C["apps/web/app/layout.tsx"] --> D["How pages are wrapped"]
     E["apps/web/app/page.tsx"] --> F["What the homepage shows"]
-    G["apps/web/app/globals.css"] --> H["How the app looks"]
+    G["apps/web/app/components/page-header.tsx"] --> H["Reusable UI"]
+    I["apps/web/app/globals.css"] --> J["Reset defaults"]
 ```
+
+## Source Files And Generated Files
+
+It helps to separate the app into two groups:
+
+### Source files you edit
+
+- `app/`
+- `eslint.config.mjs`
+- `next-env.d.ts`
+- `next.config.ts`
+- `package.json`
+- `tsconfig.json`
+
+### Generated output you usually do not edit
+
+- `.next/`: build and dev-server output created by Next.js
+- `tsconfig.tsbuildinfo`: TypeScript incremental build cache
+
+The docs in this folder describe both groups, but the source files are the ones
+you will usually work in day to day.
