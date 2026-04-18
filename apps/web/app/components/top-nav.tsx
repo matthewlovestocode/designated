@@ -22,6 +22,9 @@ export default function TopNav() {
         <li>
           <Link href="/dashboard">Dashboard</Link>
         </li>
+        <li>
+          <Link href="/admin">Admin</Link>
+        </li>
       </ul>
     </nav>
   );

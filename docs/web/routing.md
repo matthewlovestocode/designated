@@ -15,19 +15,30 @@ That means the file and folder structure becomes the URL structure.
 
 ## Current Route Map
 
-Right now the app is very small:
+Right now the app has several routes:
 
 ```mermaid
 flowchart TD
     A["app/"] --> B["layout.tsx"]
     A --> C["page.tsx"]
-    B --> D["Wraps every route"]
-    C --> E["Route: /"]
+    A --> D["about/page.tsx"]
+    A --> E["contact/page.tsx"]
+    A --> F["sign-up/page.tsx"]
+    A --> G["sign-in/page.tsx"]
+    A --> H["dashboard/page.tsx"]
+    A --> I["admin/page.tsx"]
+    B --> J["Wraps every route"]
 ```
 
-The current app only defines one URL:
+The current app defines these URLs:
 
 - `app/page.tsx` -> `/`
+- `app/about/page.tsx` -> `/about`
+- `app/contact/page.tsx` -> `/contact`
+- `app/sign-up/page.tsx` -> `/sign-up`
+- `app/sign-in/page.tsx` -> `/sign-in`
+- `app/dashboard/page.tsx` -> `/dashboard`
+- `app/admin/page.tsx` -> `/admin`
 
 ## How Next.js Thinks About It
 
@@ -52,8 +63,9 @@ Instead, it wraps pages.
 
 In this app:
 
-- `app/layout.tsx` wraps `app/page.tsx`
-- so the homepage is rendered inside the root layout
+- `app/layout.tsx` wraps every route in the app
+- that includes `/`, `/about`, `/contact`, `/sign-up`, `/sign-in`,
+  `/dashboard`, and `/admin`
 
 ## Example Directory To URL Mappings
 
@@ -89,17 +101,37 @@ Here is the actual route-related structure in this repository today:
 
 ```text
 apps/web/app/
+├── about/
+│   └── page.tsx
+├── admin/
+│   └── page.tsx
+├── auth/
+│   └── actions.ts
 ├── components/
-│   └── page-header.tsx
+│   ├── auth-message.tsx
+│   ├── click-counter.tsx
+│   ├── page-header.tsx
+│   └── top-nav.tsx
+├── contact/
+│   └── page.tsx
+├── dashboard/
+│   └── page.tsx
 ├── globals.css
 ├── layout.tsx
-└── page.tsx
+├── page.tsx
+├── sign-in/
+│   └── page.tsx
+└── sign-up/
+    └── page.tsx
 ```
 
-Only `layout.tsx` and `page.tsx` participate in routing right now.
+Only folders with `page.tsx` files create routes.
 
 The `components/` folder is just regular React component organization. It does
 not create URLs.
+
+The `auth/` folder also does not create a URL by itself here, because it does
+not contain a `page.tsx` file. It contains server actions.
 
 `globals.css` also does not create URLs. It is imported by the layout so its
 styles apply across the app.

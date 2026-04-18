@@ -11,4 +11,5 @@ audience.
 - [Sign Up Page](./sign-up-page.md): explains `apps/web/app/sign-up/page.tsx`
 - [Sign In Page](./sign-in-page.md): explains `apps/web/app/sign-in/page.tsx`
 - [Dashboard Page](./dashboard-page.md): explains `apps/web/app/dashboard/page.tsx`
+- [Admin Page](./admin-page.md): explains `apps/web/app/admin/page.tsx`
 - [Root Layout](./root-layout.md): explains `apps/web/app/layout.tsx`

@@ -13,6 +13,7 @@ The auth flow in this project works like this:
 4. Supabase creates or reads a session
 5. cookies carry that session through future requests
 6. protected pages check whether a user exists
+7. admin-only pages also check whether the user has the `admin` role
 
 ## Sign-Up Flow
 
@@ -48,6 +49,21 @@ flowchart TD
     E -- No --> G["Redirect to /sign-in"]
 ```
 
+## Admin Protection Flow
+
+```mermaid
+flowchart TD
+    A["User requests /admin"] --> B["AdminPage runs on server"]
+    B --> C["createClient() builds server Supabase client"]
+    C --> D["supabase.auth.getUser()"]
+    D --> E{"User exists?"}
+    E -- No --> F["Redirect to /sign-in"]
+    E -- Yes --> G["Check app_metadata role"]
+    G --> H{"Admin role present?"}
+    H -- Yes --> I["Render admin page"]
+    H -- No --> J["Redirect to /dashboard with message"]
+```
+
 ## Session Refresh Flow
 
 ```mermaid
@@ -64,6 +80,7 @@ flowchart TD
 - `sign-up/page.tsx`: shows the sign-up form
 - `sign-in/page.tsx`: shows the sign-in form
 - `dashboard/page.tsx`: protects and renders the dashboard
+- `admin/page.tsx`: protects and renders the admin-only page
 - `auth/actions.ts`: talks to Supabase for sign up, sign in, sign out
 - `lib/supabase/server.ts`: creates a server-side Supabase client
 - `lib/supabase/proxy.ts`: helps keep session cookies fresh
@@ -83,7 +100,8 @@ That happens in the server actions:
 
 ### Half 2: Checking whether a user is already signed in
 
-That happens on protected server-rendered pages like the dashboard.
+That happens on protected server-rendered pages like the dashboard and admin
+page.
 
-The dashboard does not trust the browser alone. It asks Supabase on the server
-for the current user.
+These pages do not trust the browser alone. They ask Supabase on the server for
+the current user, and the admin page also checks the user's role metadata.

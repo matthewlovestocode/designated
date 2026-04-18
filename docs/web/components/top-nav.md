@@ -20,6 +20,18 @@ export default function TopNav() {
         <li>
           <Link href="/contact">Contact</Link>
         </li>
+        <li>
+          <Link href="/sign-up">Sign Up</Link>
+        </li>
+        <li>
+          <Link href="/sign-in">Sign In</Link>
+        </li>
+        <li>
+          <Link href="/dashboard">Dashboard</Link>
+        </li>
+        <li>
+          <Link href="/admin">Admin</Link>
+        </li>
       </ul>
     </nav>
   );
@@ -30,11 +42,15 @@ export default function TopNav() {
 
 This component shows the top navigation for the site.
 
-It gives the user links to the three current pages:
+It gives the user links to the current public, auth, and protected pages:
 
 - `/`
 - `/about`
 - `/contact`
+- `/sign-up`
+- `/sign-in`
+- `/dashboard`
+- `/admin`
 
 ## Line By Line
 
@@ -80,6 +96,25 @@ This renders a link to the About page.
 
 This renders a link to the Contact page.
 
+## `<Link href="/sign-up">Sign Up</Link>`
+
+This renders a link to the sign-up page.
+
+## `<Link href="/sign-in">Sign In</Link>`
+
+This renders a link to the sign-in page.
+
+## `<Link href="/dashboard">Dashboard</Link>`
+
+This renders a link to the dashboard page.
+
+## `<Link href="/admin">Admin</Link>`
+
+This renders a link to the admin page.
+
+The admin page itself is still protected on the server, so showing a link does
+not grant access by itself.
+
 ## Navigation Diagram
 
 ```mermaid
@@ -87,7 +122,15 @@ flowchart TD
     A["TopNav"] --> B["Home link"]
     A --> C["About link"]
     A --> D["Contact link"]
-    B --> E["/"]
-    C --> F["/about"]
-    D --> G["/contact"]
+    A --> E["Sign Up link"]
+    A --> F["Sign In link"]
+    A --> G["Dashboard link"]
+    A --> H["Admin link"]
+    B --> I["/"]
+    C --> J["/about"]
+    D --> K["/contact"]
+    E --> L["/sign-up"]
+    F --> M["/sign-in"]
+    G --> N["/dashboard"]
+    H --> O["/admin"]
 ```

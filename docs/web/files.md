@@ -24,6 +24,15 @@ flowchart TD
     B --> M["globals.css"]
     J --> N["page-header.tsx"]
     J --> O["click-counter.tsx"]
+    J --> P["top-nav.tsx"]
+    J --> Q["auth-message.tsx"]
+    B --> R["about/page.tsx"]
+    B --> S["contact/page.tsx"]
+    B --> T["sign-up/page.tsx"]
+    B --> U["sign-in/page.tsx"]
+    B --> V["dashboard/page.tsx"]
+    B --> W["admin/page.tsx"]
+    B --> X["auth/actions.ts"]
 ```
 
 ## Top-Level Folders
@@ -47,6 +56,16 @@ Next.js reads this folder to figure out:
 - which URLs exist
 - which layouts wrap those URLs
 - which components render those pages
+
+Current route files include:
+
+- `page.tsx`
+- `about/page.tsx`
+- `contact/page.tsx`
+- `sign-up/page.tsx`
+- `sign-in/page.tsx`
+- `dashboard/page.tsx`
+- `admin/page.tsx`
 
 ## `apps/web/app/components/`
 
@@ -272,6 +291,66 @@ message is provided.
 
 There is a dedicated beginner guide for this file in
 [`docs/web/components/auth-message.md`](./components/auth-message.md).
+
+## `apps/web/app/auth/actions.ts`
+
+This file contains the server actions for auth work:
+
+- sign up
+- sign in
+- sign out
+
+There is a dedicated beginner guide for this file in
+[`docs/web/supabase/auth-actions.md`](./supabase/auth-actions.md).
+
+## `apps/web/app/about/page.tsx`
+
+This file defines the `/about` page.
+
+There is a dedicated beginner guide for this file in
+[`docs/web/pages/about-page.md`](./pages/about-page.md).
+
+## `apps/web/app/contact/page.tsx`
+
+This file defines the `/contact` page.
+
+There is a dedicated beginner guide for this file in
+[`docs/web/pages/contact-page.md`](./pages/contact-page.md).
+
+## `apps/web/app/sign-up/page.tsx`
+
+This file defines the `/sign-up` page.
+
+There is a dedicated beginner guide for this file in
+[`docs/web/pages/sign-up-page.md`](./pages/sign-up-page.md).
+
+## `apps/web/app/sign-in/page.tsx`
+
+This file defines the `/sign-in` page.
+
+There is a dedicated beginner guide for this file in
+[`docs/web/pages/sign-in-page.md`](./pages/sign-in-page.md).
+
+## `apps/web/app/dashboard/page.tsx`
+
+This file defines the `/dashboard` page.
+
+It is a protected page that checks for a signed-in user on the server.
+
+There is a dedicated beginner guide for this file in
+[`docs/web/pages/dashboard-page.md`](./pages/dashboard-page.md).
+
+## `apps/web/app/admin/page.tsx`
+
+This file defines the `/admin` page.
+
+It is an admin-only page that checks both:
+
+- whether a user is signed in
+- whether that user has the `admin` role in `app_metadata`
+
+There is a dedicated beginner guide for this file in
+[`docs/web/pages/admin-page.md`](./pages/admin-page.md).
 
 ## `apps/web/app/globals.css`
 
