@@ -23,6 +23,7 @@ flowchart TD
     B --> L["page.tsx"]
     B --> M["globals.css"]
     J --> N["page-header.tsx"]
+    J --> O["click-counter.tsx"]
 ```
 
 ## Top-Level Folders
@@ -51,7 +52,10 @@ Next.js reads this folder to figure out:
 
 This folder holds reusable UI components used by files in `app/`.
 
-Right now it contains only one component, `page-header.tsx`.
+Right now it contains:
+
+- `page-header.tsx`
+- `click-counter.tsx`
 
 ## `apps/web/.next/`
 
@@ -229,6 +233,23 @@ Right now it accepts one prop:
 - `heading`
 
 The homepage uses it to render the page heading.
+
+## `apps/web/app/components/click-counter.tsx`
+
+This is a client-side React component that demonstrates state.
+
+It imports `useState` from React, stores a number in component state, and
+updates that number when the user clicks a button.
+
+This file is a good beginner example because it shows:
+
+- what a React component function looks like
+- how React state is created with `useState`
+- how JSX can show the current state on screen
+- how clicking a button can update state and trigger a re-render
+
+There is a dedicated beginner guide for this file in
+[`docs/web/click-counter.md`](./click-counter.md).
 
 ## `apps/web/app/globals.css`
 
