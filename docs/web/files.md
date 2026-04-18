@@ -57,6 +57,7 @@ Right now it contains:
 - `page-header.tsx`
 - `click-counter.tsx`
 - `top-nav.tsx`
+- `auth-message.tsx`
 
 ## `apps/web/.next/`
 
@@ -261,6 +262,16 @@ the app.
 
 There is a dedicated beginner guide for this file in
 [`docs/web/components/top-nav.md`](./components/top-nav.md).
+
+## `apps/web/app/components/auth-message.tsx`
+
+This is a small helper component for showing auth-related messages.
+
+It renders nothing when there is no message, and renders a paragraph when a
+message is provided.
+
+There is a dedicated beginner guide for this file in
+[`docs/web/components/auth-message.md`](./components/auth-message.md).
 
 ## `apps/web/app/globals.css`
 

@@ -7,4 +7,5 @@ beginner audience.
 
 - [Page Header](./page-header.md): explains `page-header.tsx`
 - [Click Counter](./click-counter.md): explains `click-counter.tsx`
+- [Auth Message](./auth-message.md): explains `auth-message.tsx`
 - [Top Navigation](./top-nav.md): explains `top-nav.tsx`
