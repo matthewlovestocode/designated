@@ -47,3 +47,4 @@ From the repository root:
 - Add more applications under `apps/`.
 - Add shared libraries or utilities under `packages/`.
 - The Next.js app uses the App Router.
+- Beginner-friendly documentation lives in `docs/`.
