@@ -7,6 +7,7 @@ This guide explains `apps/web/.env.example` line by line.
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-supabase-publishable-key
+SUPABASE_SECRET_KEY=your-supabase-secret-key
 ```
 
 ## What This File Does
@@ -35,7 +36,16 @@ This is the publishable key for your Supabase project.
 
 The client uses it when making requests to Supabase from your app.
 
-This is not the service role key. It is the key intended for normal app usage.
+This is not the secret key. It is the key intended for normal app usage in
+public-facing app code.
+
+## `SUPABASE_SECRET_KEY=...`
+
+This is the secret key for your Supabase project.
+
+It gives elevated access and must only be used in trusted server-side tools.
+
+In this repository, it is used for the standalone admin-grant script.
 
 ## Important Beginner Note
 

@@ -35,6 +35,7 @@ You need:
 
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `SUPABASE_SECRET_KEY`
 
 ## Which Helper To Use
 
@@ -56,6 +57,42 @@ The proxy refreshes auth cookies for SSR requests.
 
 That matters if you later add Supabase Auth and want the user session to be
 available on both the server and the client.
+
+## Admin Script
+
+There is now a standalone script for granting the `admin` role to an existing
+Supabase user:
+
+```bash
+npm run make-admin --workspace web -- user@example.com
+```
+
+This script uses the Supabase Admin API, so it requires:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `SUPABASE_SECRET_KEY`
+
+It updates the user's `app_metadata` to include the `admin` role.
+
+The script file is:
+
+- `apps/web/scripts/add-admin.mjs`
+
+The npm command is defined in:
+
+- `apps/web/package.json`
+
+Use `--help` to see the built-in usage text:
+
+```bash
+npm run make-admin --workspace web -- --help
+```
+
+Important safety note:
+
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` is for normal app usage
+- `SUPABASE_SECRET_KEY` is for trusted server-side admin work only
+- never expose the secret key in browser code
 
 ## Official Sources
 
