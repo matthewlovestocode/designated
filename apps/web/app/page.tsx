@@ -6,6 +6,7 @@ export default function Home() {
     <main>
       <section>
         <PageHeader heading="Designated" />
+        <p>Supabase client helpers are set up for this Next.js app.</p>
         <ClickCounter />
       </section>
     </main>

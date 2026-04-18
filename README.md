@@ -34,6 +34,18 @@ npm run dev
 
 Then open [http://localhost:3000](http://localhost:3000).
 
+## Environment Files
+
+The web app keeps its environment example file here:
+
+- `apps/web/.env.example`
+
+If you are setting up Supabase locally, create:
+
+- `apps/web/.env.local`
+
+and copy the variable names from the example file.
+
 ## Scripts
 
 From the repository root:

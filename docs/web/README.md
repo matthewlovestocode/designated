@@ -13,6 +13,8 @@ explain what each file is responsible for.
   is for.
 - [Page Guides](./pages/README.md): one guide per page and layout file.
 - [Component Guides](./components/README.md): one guide per component file.
+- [Supabase Setup](./supabase.md): where the Supabase config lives and how to
+  use it.
 - [Routing Guide](./routing.md): how Next.js App Router maps URLs to folders
   and files.
 - [How Rendering Works](./rendering.md): a simple explanation of how the app
