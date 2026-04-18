@@ -11,8 +11,8 @@ explain what each file is responsible for.
   monorepo.
 - [File Guide](./files.md): what every current file and folder in `apps/web`
   is for.
-- [Click Counter Guide](./click-counter.md): a beginner explanation of the
-  `ClickCounter` React component and how state works.
+- [Page Guides](./pages/README.md): one guide per page and layout file.
+- [Component Guides](./components/README.md): one guide per component file.
 - [Routing Guide](./routing.md): how Next.js App Router maps URLs to folders
   and files.
 - [How Rendering Works](./rendering.md): a simple explanation of how the app

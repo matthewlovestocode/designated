@@ -56,6 +56,7 @@ Right now it contains:
 
 - `page-header.tsx`
 - `click-counter.tsx`
+- `top-nav.tsx`
 
 ## `apps/web/.next/`
 
@@ -249,7 +250,17 @@ This file is a good beginner example because it shows:
 - how clicking a button can update state and trigger a re-render
 
 There is a dedicated beginner guide for this file in
-[`docs/web/click-counter.md`](./click-counter.md).
+[`docs/web/components/click-counter.md`](./components/click-counter.md).
+
+## `apps/web/app/components/top-nav.tsx`
+
+This is the shared top navigation component.
+
+It uses Next.js `Link` components to let users move between the current pages in
+the app.
+
+There is a dedicated beginner guide for this file in
+[`docs/web/components/top-nav.md`](./components/top-nav.md).
 
 ## `apps/web/app/globals.css`
 

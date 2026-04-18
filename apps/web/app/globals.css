@@ -39,3 +39,23 @@ h5,
 h6 {
   margin: 0;
 }
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+}
+
+body {
+  padding: 1rem;
+}
+
+.top-nav {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin-bottom: 1rem;
+}
