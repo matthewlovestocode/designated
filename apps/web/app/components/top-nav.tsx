@@ -13,6 +13,15 @@ export default function TopNav() {
         <li>
           <Link href="/contact">Contact</Link>
         </li>
+        <li>
+          <Link href="/sign-up">Sign Up</Link>
+        </li>
+        <li>
+          <Link href="/sign-in">Sign In</Link>
+        </li>
+        <li>
+          <Link href="/dashboard">Dashboard</Link>
+        </li>
       </ul>
     </nav>
   );
