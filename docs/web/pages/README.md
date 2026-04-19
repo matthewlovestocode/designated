@@ -1,7 +1,10 @@
 # Page Guides
 
-These guides explain each page file in `apps/web/app/` for a beginner
-audience.
+These guides explain each page and layout file in `apps/web/app/` for a
+beginner audience.
+
+Most of the current pages use Material UI layout components such as
+`Container`, `Paper`, `Stack`, and `Typography`.
 
 ## Guides
 

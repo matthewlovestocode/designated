@@ -3,6 +3,9 @@
 These guides explain each component file in `apps/web/app/components/` for a
 beginner audience.
 
+The current components mix React concepts with Material UI building blocks, so
+the guides explain both.
+
 ## Guides
 
 - [Page Header](./page-header.md): explains `page-header.tsx`

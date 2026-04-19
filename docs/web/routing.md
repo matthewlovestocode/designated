@@ -10,12 +10,11 @@ In App Router:
 - folders usually represent route segments
 - `page.tsx` files usually represent pages
 - `layout.tsx` files wrap pages in the same folder and below it
+- regular helper files do not create routes
 
 That means the file and folder structure becomes the URL structure.
 
 ## Current Route Map
-
-Right now the app has several routes:
 
 ```mermaid
 flowchart TD
@@ -27,7 +26,10 @@ flowchart TD
     A --> G["sign-in/page.tsx"]
     A --> H["dashboard/page.tsx"]
     A --> I["admin/page.tsx"]
-    B --> J["Wraps every route"]
+    A --> J["theme-provider.tsx"]
+    A --> K["components/"]
+    A --> L["auth/actions.ts"]
+    B --> M["Wraps every route"]
 ```
 
 The current app defines these URLs:
@@ -44,16 +46,15 @@ The current app defines these URLs:
 
 ```mermaid
 flowchart LR
-    A["URL: /"] --> B["app/page.tsx"]
-    B --> C["Rendered inside app/layout.tsx"]
-    C --> D["Returned to the browser"]
+    A["URL: /dashboard"] --> B["app/dashboard/page.tsx"]
+    B --> C["Wrapped by app/layout.tsx"]
+    C --> D["Sent to the browser"]
 ```
 
-When someone visits `/`, Next.js looks in `app/` for a `page.tsx` file that
+When someone visits `/dashboard`, Next.js looks for a `page.tsx` file that
 matches that path.
 
-Because the homepage lives directly inside `app/`, its URL is the site root:
-`/`.
+Because the file is `app/dashboard/page.tsx`, the URL becomes `/dashboard`.
 
 ## How `layout.tsx` Fits In
 
@@ -67,37 +68,21 @@ In this app:
 - that includes `/`, `/about`, `/contact`, `/sign-up`, `/sign-in`,
   `/dashboard`, and `/admin`
 
-## Example Directory To URL Mappings
+## Files That Do Not Create Routes
 
-These examples are not in the app yet, but they show the App Router pattern:
+Some files inside `app/` are important but do not map to URLs.
 
-```mermaid
-flowchart TD
-    A["app/about/page.tsx"] --> B["/about"]
-    C["app/blog/page.tsx"] --> D["/blog"]
-    E["app/blog/post/page.tsx"] --> F["/blog/post"]
-    G["app/dashboard/settings/page.tsx"] --> H["/dashboard/settings"]
-```
+Examples:
 
-That means:
+- `theme-provider.tsx`: provides the MUI light/dark theme
+- `components/top-nav.tsx`: shared navigation component
+- `components/click-counter.tsx`: reusable component
+- `auth/actions.ts`: server actions for sign in, sign up, and sign out
+- `globals.css`: global CSS file imported by the layout
 
-- `app/about/page.tsx` would become `/about`
-- `app/blog/page.tsx` would become `/blog`
-- `app/blog/post/page.tsx` would become `/blog/post`
-- `app/dashboard/settings/page.tsx` would become `/dashboard/settings`
-
-## A Useful Mental Model
-
-You can think of App Router like this:
-
-1. Start in `app/`
-2. Walk through folders one segment at a time
-3. When you hit `page.tsx`, that file becomes the page for that URL
-4. Any `layout.tsx` files on the way wrap the result
+These files support routing, but they are not routes themselves.
 
 ## Current App Structure
-
-Here is the actual route-related structure in this repository today:
 
 ```text
 apps/web/app/
@@ -121,17 +106,15 @@ apps/web/app/
 ├── page.tsx
 ├── sign-in/
 │   └── page.tsx
-└── sign-up/
-    └── page.tsx
+├── sign-up/
+│   └── page.tsx
+└── theme-provider.tsx
 ```
 
 Only folders with `page.tsx` files create routes.
 
-The `components/` folder is just regular React component organization. It does
-not create URLs.
+The `components/` folder is just React component organization. It does not
+create URLs.
 
 The `auth/` folder also does not create a URL by itself here, because it does
 not contain a `page.tsx` file. It contains server actions.
-
-`globals.css` also does not create URLs. It is imported by the layout so its
-styles apply across the app.

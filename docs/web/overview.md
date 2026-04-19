@@ -2,46 +2,48 @@
 
 The web app lives in `apps/web`.
 
-It is a [Next.js](https://nextjs.org/) application, which means it uses React
-to build user interfaces and Next.js to handle routing, building, and serving
-the site.
+It is a Next.js app that uses:
+
+- React for components
+- App Router for file-based routing
+- Material UI for visual components and theming
+- Supabase for authentication and user/session work
 
 ## How It Fits Into The Monorepo
 
-This repository uses `npm` workspaces. That means one repository can contain
+This repository uses `npm` workspaces. That means one repository can hold
 multiple related projects.
 
-Right now there is one application:
+Right now the main app is:
 
 - `apps/web`: the Next.js frontend
 
 There is also a place for shared code:
 
-- `packages/`: reusable libraries, UI components, or helpers you may add later
+- `packages/`: reusable libraries or UI packages you may add later
 
 ```mermaid
 flowchart TD
     A["Monorepo Root"] --> B["apps/"]
     A --> C["packages/"]
     B --> D["web"]
-    D --> E["Next.js App"]
-    C --> F["Shared code later"]
+    D --> E["Next.js + React"]
+    D --> F["Material UI"]
+    D --> G["Supabase"]
 ```
 
-## What This App Does Right Now
+## What The App Does Right Now
 
-At the moment, the app is a small starter site. It includes:
+The project is still early, but the current app already has a few important
+pieces:
 
-- a root layout
-- a home page
-- a small reusable component
-- a global stylesheet with only reset defaults
-- TypeScript configuration
-- Next.js configuration
-- ESLint configuration
-- generated build output in `.next/` after you run the app or build it
-
-This gives you a solid starting point without a lot of extra complexity.
+- public pages such as Home, About, and Contact
+- auth pages for sign up and sign in
+- a protected dashboard page
+- an admin-only page
+- a shared top navigation
+- a light and dark theme toggle
+- Supabase helpers for browser, server, and admin work
 
 ## Main Commands
 
@@ -52,52 +54,67 @@ From the repository root:
 - `npm run build`: creates a production build
 - `npm run lint`: checks the web app for common code-quality issues
 
+From the `web` workspace:
+
+- `npm run make-admin --workspace web -- user@example.com`: grants the admin
+  role to an existing Supabase user
+
 ## A Good Beginner Path
 
-If you want to learn this project step by step, read the files in this order:
+If you want to learn this project step by step, this is a useful path:
 
 1. `apps/web/package.json`
 2. `apps/web/app/layout.tsx`
-3. `apps/web/app/page.tsx`
-4. `apps/web/app/components/page-header.tsx`
-5. `apps/web/app/globals.css`
+3. `apps/web/app/theme-provider.tsx`
+4. `apps/web/app/components/top-nav.tsx`
+5. `apps/web/app/page.tsx`
+6. `apps/web/app/components/page-header.tsx`
+7. `apps/web/app/components/click-counter.tsx`
+8. `apps/web/lib/supabase/server.ts`
+9. `apps/web/app/auth/actions.ts`
 
-That path helps you see:
+That path shows:
 
 - how the app is configured
-- how the page is wrapped
-- what the homepage renders
-- how the reusable heading component works
-- which global defaults exist across the app
+- how every page is wrapped
+- how theme state is shared
+- how navigation works
+- how a page is built from smaller components
+- how client-side state works
+- how server-side auth checks work
 
 ## Visual Learning Map
 
 ```mermaid
 flowchart LR
-    A["apps/web/package.json"] --> B["How the app runs"]
-    C["apps/web/app/layout.tsx"] --> D["How pages are wrapped"]
-    E["apps/web/app/page.tsx"] --> F["What the homepage shows"]
-    G["apps/web/app/components/page-header.tsx"] --> H["Reusable UI"]
-    I["apps/web/app/globals.css"] --> J["Reset defaults"]
+    A["package.json"] --> B["How the app runs"]
+    C["layout.tsx"] --> D["App shell for every route"]
+    E["theme-provider.tsx"] --> F["Light and dark mode"]
+    G["top-nav.tsx"] --> H["Shared navigation and toggle"]
+    I["page.tsx"] --> J["Homepage UI"]
+    K["click-counter.tsx"] --> L["State and re-rendering"]
+    M["auth/actions.ts"] --> N["Supabase auth flow"]
 ```
 
 ## Source Files And Generated Files
 
-It helps to separate the app into two groups:
+It helps to separate the app into two groups.
 
 ### Source files you edit
 
 - `app/`
+- `lib/`
+- `scripts/`
 - `eslint.config.mjs`
 - `next-env.d.ts`
 - `next.config.ts`
 - `package.json`
 - `tsconfig.json`
 
-### Generated output you usually do not edit
+### Generated files and folders you usually do not edit
 
 - `.next/`: build and dev-server output created by Next.js
 - `tsconfig.tsbuildinfo`: TypeScript incremental build cache
 
-The docs in this folder describe both groups, but the source files are the ones
-you will usually work in day to day.
+Most day-to-day work happens in the source files. The generated files exist so
+the framework and tooling can run faster.

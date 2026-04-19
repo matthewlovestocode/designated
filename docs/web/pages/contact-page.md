@@ -5,16 +5,24 @@ This guide explains `apps/web/app/contact/page.tsx` line by line.
 ## The Full File
 
 ```tsx
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import PageHeader from "../components/page-header";
 
 export default function ContactPage() {
   return (
-    <main>
-      <section>
-        <PageHeader heading="Contact" />
-        <p>This is the contact page for the Designated web app.</p>
-      </section>
-    </main>
+    <Container component="main" maxWidth="md" sx={{ py: 4 }}>
+      <Paper sx={{ p: 4 }}>
+        <Stack spacing={2}>
+          <PageHeader heading="Contact" />
+          <Typography>
+            This is the contact page for the Designated web app.
+          </Typography>
+        </Stack>
+      </Paper>
+    </Container>
   );
 }
 ```
@@ -28,6 +36,10 @@ Because the file lives at `app/contact/page.tsx`, Next.js maps it to the URL
 
 ## Line By Line
 
+## `import Container ... Typography ...`
+
+These imports bring in Material UI layout and text components.
+
 ## `import PageHeader from "../components/page-header";`
 
 This imports the shared `PageHeader` component from the `components/` folder.
@@ -36,30 +48,25 @@ This imports the shared `PageHeader` component from the `components/` folder.
 
 This defines the React component for the Contact page.
 
-## `<main>`
+## `<Container component="main" maxWidth="md" sx={{ py: 4 }}>`
 
-This marks the primary content area of the page.
+This creates the centered outer wrapper for the page.
 
-## `<section>`
+## `<Paper sx={{ p: 4 }}>`
 
-This groups the heading and paragraph together.
+This creates a surface box around the content.
+
+## `<Stack spacing={2}>`
+
+This vertically arranges the page content with spacing.
 
 ## `<PageHeader heading="Contact" />`
 
 This renders the shared heading component with the text `"Contact"`.
 
-## `<p>This is the contact page for the Designated web app.</p>`
+## `<Typography> ... </Typography>`
 
-This renders a simple paragraph under the heading.
-
-## How React Uses This File
-
-When a user visits `/contact`:
-
-1. Next.js matches the URL to `app/contact/page.tsx`
-2. React runs `ContactPage`
-3. JSX is returned
-4. the browser shows the final page
+This renders the body text for the page.
 
 ## Route Diagram
 
@@ -67,5 +74,5 @@ When a user visits `/contact`:
 flowchart LR
     A["URL: /contact"] --> B["app/contact/page.tsx"]
     B --> C["ContactPage component runs"]
-    C --> D["Heading and paragraph appear"]
+    C --> D["MUI layout and text render"]
 ```

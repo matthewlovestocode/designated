@@ -1,31 +1,82 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import MenuIcon from "@mui/icons-material/Menu";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { useColorMode } from "../theme-provider";
 
 export default function TopNav() {
+  const { mode, toggleColorMode } = useColorMode();
+  const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
+
+  const openMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setMenuAnchor(event.currentTarget);
+  };
+
+  const closeMenu = () => {
+    setMenuAnchor(null);
+  };
+
   return (
-    <nav aria-label="Primary">
-      <ul className="top-nav">
-        <li>
-          <Link href="/">Home</Link>
-        </li>
-        <li>
-          <Link href="/about">About</Link>
-        </li>
-        <li>
-          <Link href="/contact">Contact</Link>
-        </li>
-        <li>
-          <Link href="/sign-up">Sign Up</Link>
-        </li>
-        <li>
-          <Link href="/sign-in">Sign In</Link>
-        </li>
-        <li>
-          <Link href="/dashboard">Dashboard</Link>
-        </li>
-        <li>
-          <Link href="/admin">Admin</Link>
-        </li>
-      </ul>
-    </nav>
+    <AppBar position="static" color="transparent" elevation={0}>
+      <Toolbar sx={{ gap: 2, flexWrap: "wrap" }}>
+        <Typography variant="h6">Designated</Typography>
+        <Box sx={{ flexGrow: 1 }} />
+        <IconButton
+          aria-controls={menuAnchor ? "page-links-menu" : undefined}
+          aria-expanded={menuAnchor ? "true" : undefined}
+          aria-haspopup="true"
+          aria-label="Open navigation menu"
+          onClick={openMenu}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Menu
+          id="page-links-menu"
+          anchorEl={menuAnchor}
+          open={Boolean(menuAnchor)}
+          onClose={closeMenu}
+        >
+          <MenuItem component={Link} href="/" onClick={closeMenu}>
+            Home
+          </MenuItem>
+          <MenuItem component={Link} href="/about" onClick={closeMenu}>
+            About
+          </MenuItem>
+          <MenuItem component={Link} href="/contact" onClick={closeMenu}>
+            Contact
+          </MenuItem>
+          <MenuItem component={Link} href="/sign-up" onClick={closeMenu}>
+            Sign Up
+          </MenuItem>
+          <MenuItem component={Link} href="/sign-in" onClick={closeMenu}>
+            Sign In
+          </MenuItem>
+          <MenuItem component={Link} href="/dashboard" onClick={closeMenu}>
+            Dashboard
+          </MenuItem>
+          <MenuItem component={Link} href="/admin" onClick={closeMenu}>
+            Admin
+          </MenuItem>
+        </Menu>
+        <IconButton
+          aria-label={
+            mode === "light" ? "Switch to dark mode" : "Switch to light mode"
+          }
+          onClick={toggleColorMode}
+        >
+          {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   );
 }

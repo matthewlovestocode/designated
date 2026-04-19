@@ -1,5 +1,9 @@
 import type { User } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import PageHeader from "../components/page-header";
 import { createClient } from "../../lib/supabase/server";
 
@@ -33,12 +37,14 @@ export default async function AdminPage() {
   }
 
   return (
-    <main>
-      <section>
+    <Container component="main" maxWidth="md" sx={{ py: 4 }}>
+      <Paper sx={{ p: 4 }}>
+        <Stack spacing={2}>
         <PageHeader heading="Admin" />
-        <p>Welcome to the admin page.</p>
-        <p>Signed in as: {user.email}</p>
-      </section>
-    </main>
+        <Typography>Welcome to the admin page.</Typography>
+        <Typography>Signed in as: {user.email}</Typography>
+        </Stack>
+      </Paper>
+    </Container>
   );
 }

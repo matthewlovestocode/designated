@@ -1,11 +1,13 @@
+import Typography from "@mui/material/Typography";
+
 interface PageHeaderProps {
   heading: string;
 }
 
 export default function PageHeader({ heading }: PageHeaderProps) {
   return (
-    <div>
-      <h1>{heading}</h1>
-    </div>
+    <Typography component="h1" variant="h3">
+      {heading}
+    </Typography>
   );
 }

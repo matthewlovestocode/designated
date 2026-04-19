@@ -1,12 +1,20 @@
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import PageHeader from "../components/page-header";
 
 export default function ContactPage() {
   return (
-    <main>
-      <section>
+    <Container component="main" maxWidth="md" sx={{ py: 4 }}>
+      <Paper sx={{ p: 4 }}>
+        <Stack spacing={2}>
         <PageHeader heading="Contact" />
-        <p>This is the contact page for the Designated web app.</p>
-      </section>
-    </main>
+        <Typography>
+          This is the contact page for the Designated web app.
+        </Typography>
+        </Stack>
+      </Paper>
+    </Container>
   );
 }

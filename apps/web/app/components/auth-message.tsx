@@ -1,3 +1,5 @@
+import Alert from "@mui/material/Alert";
+
 interface AuthMessageProps {
   message?: string;
 }
@@ -7,5 +9,5 @@ export default function AuthMessage({ message }: AuthMessageProps) {
     return null;
   }
 
-  return <p>{message}</p>;
+  return <Alert severity="info">{message}</Alert>;
 }

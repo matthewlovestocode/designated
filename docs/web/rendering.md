@@ -1,14 +1,18 @@
 # How Rendering Works
 
-This is a simple explanation of how the current web app becomes a webpage.
+This guide explains how the current web app becomes a webpage.
+
+It also explains what re-rendering means when React state changes.
+
+## Big Picture
 
 ```mermaid
 flowchart LR
-    A["npm run dev"] --> B["Root package.json"]
-    B --> C["apps/web workspace"]
-    C --> D["Next.js dev server"]
-    D --> E["app/layout.tsx + app/page.tsx + globals.css"]
-    E --> F["Browser at localhost:3000"]
+    A["npm run dev"] --> B["Next.js dev server"]
+    B --> C["layout.tsx"]
+    C --> D["AppThemeProvider"]
+    D --> E["TopNav + current page"]
+    E --> F["Browser"]
 ```
 
 ## Step 1: You Start The App
@@ -27,39 +31,47 @@ Next.js looks inside `apps/web/app/`.
 
 It sees:
 
-- `layout.tsx`, which wraps the app
-- `page.tsx`, which defines the homepage
-- `globals.css`, which provides a small reset
-- `components/page-header.tsx`, which supplies the heading UI
+- `layout.tsx`, which wraps every route
+- `theme-provider.tsx`, which provides the Material UI theme
+- `page.tsx` and other route files, which define page content
+- `components/`, which holds reusable React components
+- `globals.css`, which applies a few global CSS defaults
 
-## Step 3: React Creates The UI
+## Step 3: React Renders Components
 
-The `page.tsx` file exports a React component.
+A React component is a function that returns JSX.
 
-A React component is a function that returns UI written in JSX. JSX looks like
-HTML, but it is actually JavaScript and TypeScript syntax for describing the
-interface.
+JSX is a JavaScript-friendly way to describe UI.
 
-## What "Render" Means
+When React renders a component, it runs the function and reads the JSX it
+returns.
 
-In React, rendering means React runs a component and reads the JSX it returns.
+In this app:
 
-That JSX tells React what the UI should look like.
+- `RootLayout` renders the outer document structure
+- `AppThemeProvider` chooses the current MUI theme
+- `TopNav` renders shared navigation
+- the current page component renders the page-specific content
 
-For example:
+## What "Initial Render" Means
 
-- `page.tsx` renders the homepage structure
-- `page-header.tsx` renders the heading UI
-- `click-counter.tsx` renders the current click count and button
+The initial render is the first time React runs a component to figure out what
+should appear on screen.
 
-The first time React does this work for a component, that is the initial
-render.
+For the home page, the rough flow is:
+
+1. Next.js chooses `app/page.tsx` because the URL is `/`
+2. `app/layout.tsx` wraps that page
+3. `AppThemeProvider` decides whether the theme is light or dark
+4. `TopNav` renders
+5. the Home page renders its `Container`, `Paper`, `Stack`, `PageHeader`, and
+   `ClickCounter`
 
 ## What "Re-Render" Means
 
 A re-render happens when React runs a component again because something changed.
 
-Common reasons include:
+Common reasons:
 
 - state changed
 - props changed
@@ -67,72 +79,69 @@ Common reasons include:
 
 In this app, the easiest example is `ClickCounter`.
 
-When its state changes, React runs the `ClickCounter` component again and uses
-the new `count` value to produce updated JSX.
+## State Change And Re-Render
 
-## State Change To Re-Render Flow
+`ClickCounter` stores `count` in React state with `useState(0)`.
+
+When the user clicks the button:
+
+1. the button’s `onClick` handler runs
+2. `setCount(count + 1)` asks React to store a new value
+3. React re-runs `ClickCounter`
+4. the returned JSX now contains the new number
+5. React updates the browser output
 
 ```mermaid
 flowchart LR
-    A["User clicks button"] --> B["setCount(...) runs"]
+    A["User clicks Button"] --> B["setCount(count + 1)"]
     B --> C["React stores new state"]
-    C --> D["React re-renders ClickCounter"]
-    D --> E["New JSX contains updated count"]
-    E --> F["Browser updates changed text"]
+    C --> D["React re-runs ClickCounter"]
+    D --> E["New JSX says Clicks: 1, 2, 3..."]
+    E --> F["Browser updates visible text"]
 ```
 
-## Step 4: The Browser Displays The Result
+## Why The Whole Page Does Not Feel Rebuilt
 
-Next.js prepares the page, and the browser shows it at
-`http://localhost:3000`.
+React may re-run a component function, but it only updates the parts of the DOM
+that actually need to change.
 
-When you edit the code while the dev server is running, Next.js usually updates
-the page automatically.
+For example, when `ClickCounter` changes:
 
-## Rendering In The `ClickCounter` Example
+- the navigation does not need to change
+- the page heading does not need to change
+- only the counter text changes
 
-On the first render:
+So the browser output updates efficiently.
 
-1. `count` starts at `0`
-2. React renders `Clicks: 0`
-3. the browser shows that text
+## How The Theme Fits Into Rendering
 
-After a click:
+The theme provider also participates in rendering.
 
-1. the button calls `setCount(count + 1)`
-2. React stores the new value
-3. React re-renders the component
-4. the JSX now contains the new count
-5. the browser updates the visible text
+When the user clicks the theme toggle in the top nav:
 
-So the key idea is:
+1. `toggleColorMode()` changes the `mode` state
+2. `AppThemeProvider` re-renders
+3. it chooses the other MUI theme
+4. MUI components receive the new theme values
+5. the app updates from light to dark, or dark to light
 
-- state changes lead to re-renders
-- re-renders produce updated JSX
-- React updates the browser to match
-
-## In This Starter App
-
-The flow is especially simple:
-
-1. `layout.tsx` defines the outer document structure.
-2. `page.tsx` defines the homepage content.
-3. `page-header.tsx` renders the heading inside the homepage.
-4. `globals.css` applies a small set of global reset defaults.
-
-That makes this a good beginner project because there are only a few moving
-parts to learn first.
+```mermaid
+flowchart TD
+    A["Theme toggle button"] --> B["toggleColorMode()"]
+    B --> C["mode state changes"]
+    C --> D["AppThemeProvider re-renders"]
+    D --> E["ThemeProvider gets lightTheme or darkTheme"]
+    E --> F["MUI components redraw with new colors"]
+```
 
 ## File Relationship Diagram
 
 ```mermaid
 flowchart TD
-    A["layout.tsx"] --> B["Wraps every page"]
-    C["page.tsx"] --> D["Homepage content"]
-    E["page-header.tsx"] --> F["Heading UI"]
-    G["globals.css"] --> H["Reset defaults"]
-    B --> I["Final page"]
-    D --> I
-    F --> I
-    H --> I
+    A["layout.tsx"] --> B["AppRouterCacheProvider"]
+    B --> C["AppThemeProvider"]
+    C --> D["TopNav"]
+    C --> E["Current page"]
+    E --> F["PageHeader"]
+    E --> G["ClickCounter"]
 ```

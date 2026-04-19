@@ -5,17 +5,26 @@ This guide explains `apps/web/app/page.tsx` line by line.
 ## The Full File
 
 ```tsx
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import PageHeader from "./components/page-header";
 import ClickCounter from "./components/click-counter";
 
 export default function Home() {
   return (
-    <main>
-      <section>
-        <PageHeader heading="Designated" />
-        <ClickCounter />
-      </section>
-    </main>
+    <Container component="main" maxWidth="md" sx={{ py: 4 }}>
+      <Paper sx={{ p: 4 }}>
+        <Stack spacing={3}>
+          <PageHeader heading="Designated" />
+          <Typography>
+            Supabase client helpers are set up for this Next.js app.
+          </Typography>
+          <ClickCounter />
+        </Stack>
+      </Paper>
+    </Container>
   );
 }
 ```
@@ -24,84 +33,75 @@ export default function Home() {
 
 This file defines the homepage route at `/`.
 
-When a user visits the root URL of the site, Next.js renders this component.
+When someone visits the root URL of the site, Next.js renders this component.
 
 ## Line By Line
 
-## `import PageHeader from "./components/page-header";`
+## `import Container ... Paper ... Stack ... Typography ...`
 
-This imports the `PageHeader` component from the local `components/` folder.
+These imports bring in Material UI layout and text components:
 
-The `./` means "start from the current folder."
+- `Container`: centers content and limits width
+- `Paper`: a surface container
+- `Stack`: lays out items with spacing
+- `Typography`: styled text
 
-This component is used to show the page heading.
+## `import PageHeader ... ClickCounter ...`
 
-## `import ClickCounter from "./components/click-counter";`
-
-This imports the `ClickCounter` component.
-
-The homepage uses it to show a small interactive example.
+These imports bring in local reusable components from the `components/` folder.
 
 ## `export default function Home() {`
 
 This defines the React component for the homepage.
 
-Because it is the default export, Next.js can use it as the page for `/`.
+Because it is the default export in `app/page.tsx`, Next.js uses it as the page
+for `/`.
 
-## `return ( ... )`
+## `<Container component="main" maxWidth="md" sx={{ py: 4 }}>`
 
-The component returns JSX.
+This creates the outer page wrapper.
 
-JSX describes what should appear on the page.
+Important props:
 
-## `<main>`
+- `component="main"`: render the underlying HTML as `<main>`
+- `maxWidth="md"`: limit the content width
+- `sx={{ py: 4 }}`: add vertical padding
 
-The `<main>` element represents the main content area of the page.
+## `<Paper sx={{ p: 4 }}>`
 
-It helps give the page semantic structure.
+This creates a Material UI surface box around the content.
 
-## `<section>`
+`sx={{ p: 4 }}` adds padding on all sides.
 
-The `<section>` element groups related content together.
+## `<Stack spacing={3}>`
 
-In this file, it groups the heading and the click counter.
+This creates a simple vertical layout.
+
+Each child inside it gets spacing from the next child.
 
 ## `<PageHeader heading="Designated" />`
 
-This renders the `PageHeader` component.
+This renders the shared heading component with the text `"Designated"`.
 
-The `heading` prop passes the text `"Designated"` into that component.
+## `<Typography> ... </Typography>`
 
-That is how the component knows what heading to show.
+This renders a short paragraph explaining that Supabase helpers are already set
+up.
 
 ## `<ClickCounter />`
 
-This renders the `ClickCounter` component.
+This renders the interactive click counter.
 
-Unlike `PageHeader`, it does not need props right now.
-
-It manages its own state internally.
-
-## `);` and `}`
-
-These close the JSX, the `return`, and the component function.
-
-## How React Uses This File
-
-When React renders this component:
-
-1. it runs the `Home` function
-2. it sees that the function returns JSX
-3. it renders `PageHeader`
-4. it renders `ClickCounter`
-5. the browser shows the result
+That gives the page a small client-side React example.
 
 ## Component Relationship Diagram
 
 ```mermaid
 flowchart TD
-    A["Home page component"] --> B["PageHeader"]
-    A --> C["ClickCounter"]
-    B --> D["Heading shown"]
-    C --> E["Interactive counter shown"]
+    A["Home page"] --> B["Container"]
+    B --> C["Paper"]
+    C --> D["Stack"]
+    D --> E["PageHeader"]
+    D --> F["Typography"]
+    D --> G["ClickCounter"]
 ```

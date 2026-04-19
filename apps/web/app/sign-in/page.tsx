@@ -1,4 +1,10 @@
 import Link from "next/link";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import AuthMessage from "../components/auth-message";
 import PageHeader from "../components/page-header";
 import { signIn } from "../auth/actions";
@@ -11,25 +17,29 @@ export default async function SignInPage({
   const { message } = await searchParams;
 
   return (
-    <main>
-      <section>
+    <Container component="main" maxWidth="sm" sx={{ py: 4 }}>
+      <Paper sx={{ p: 4 }}>
+        <Stack spacing={3}>
         <PageHeader heading="Sign In" />
         <AuthMessage message={message} />
-        <form action={signIn}>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input id="email" name="email" type="email" required />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input id="password" name="password" type="password" required />
-          </div>
-          <button type="submit">Sign In</button>
-        </form>
-        <p>
+        <Stack component="form" action={signIn} spacing={2}>
+          <TextField id="email" name="email" type="email" label="Email" required />
+          <TextField
+            id="password"
+            name="password"
+            type="password"
+            label="Password"
+            required
+          />
+          <Button type="submit" variant="contained">
+            Sign In
+          </Button>
+        </Stack>
+        <Typography>
           Need an account? <Link href="/sign-up">Sign up</Link>
-        </p>
-      </section>
-    </main>
+        </Typography>
+        </Stack>
+      </Paper>
+    </Container>
   );
 }

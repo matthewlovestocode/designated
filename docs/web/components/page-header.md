@@ -5,27 +5,36 @@ This guide explains `apps/web/app/components/page-header.tsx` line by line.
 ## The Full File
 
 ```tsx
+import Typography from "@mui/material/Typography";
+
 interface PageHeaderProps {
   heading: string;
 }
 
 export default function PageHeader({ heading }: PageHeaderProps) {
   return (
-    <div>
-      <h1>{heading}</h1>
-    </div>
+    <Typography component="h1" variant="h3">
+      {heading}
+    </Typography>
   );
 }
 ```
 
 ## What This Component Does
 
-This component displays a heading.
+This component displays a page heading.
 
-It is a reusable component, which means different pages can use it with
-different `heading` values.
+It is reusable, which means multiple pages can use the same component while
+passing different heading text.
 
 ## Line By Line
+
+## `import Typography from "@mui/material/Typography";`
+
+This imports Material UI’s `Typography` component.
+
+`Typography` is a helpful wrapper for text because it applies theme-aware text
+styles without needing raw HTML and CSS everywhere.
 
 ## `interface PageHeaderProps {`
 
@@ -33,7 +42,7 @@ This starts a TypeScript interface.
 
 An interface describes the shape of an object.
 
-Here, it describes the props that the component expects.
+Here, it describes the props the component expects.
 
 ## `heading: string;`
 
@@ -44,30 +53,32 @@ That prop must be a string.
 Examples:
 
 - `"Designated"`
-- `"About"`
-- `"Contact"`
+- `"Sign In"`
+- `"Dashboard"`
 
 ## `export default function PageHeader({ heading }: PageHeaderProps) {`
 
-This defines the React component.
+This defines the component.
 
 The `{ heading }` part pulls the `heading` prop out of the props object.
 
 The `: PageHeaderProps` part tells TypeScript what props are allowed.
 
-## `return ( ... )`
+## `<Typography component="h1" variant="h3">`
 
-This returns the JSX for the component.
+This renders Material UI `Typography`.
 
-## `<div>`
+These two props do different jobs:
 
-This is a wrapper element around the heading.
+- `component="h1"` controls the underlying HTML element
+- `variant="h3"` controls the visual style
 
-## `<h1>{heading}</h1>`
+That means the page still gets a real `<h1>` for structure, while the text
+looks like Material UI’s `h3` style.
 
-This renders a top-level heading.
+## `{heading}`
 
-The `{heading}` part inserts the value that was passed in as a prop.
+This inserts the value of the `heading` prop.
 
 If the page uses:
 
@@ -75,7 +86,7 @@ If the page uses:
 <PageHeader heading="About" />
 ```
 
-then the rendered heading becomes:
+then the rendered heading text becomes:
 
 ```text
 About
@@ -85,5 +96,4 @@ About
 
 Props let one component be reused with different data.
 
-That means this one component can serve multiple pages without repeating the
-same heading markup everywhere.
+That means this file can stay small and simple while still serving many pages.
