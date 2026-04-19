@@ -25,12 +25,18 @@ flowchart TD
     A --> F["sign-up/page.tsx"]
     A --> G["sign-in/page.tsx"]
     A --> H["dashboard/page.tsx"]
-    A --> I["admin/page.tsx"]
-    A --> IA["admin/users/page.tsx"]
-    A --> J["theme-provider.tsx"]
-    A --> K["components/"]
-    A --> L["auth/actions.ts"]
-    B --> M["Wraps every route"]
+    A --> I["patron/page.tsx"]
+    A --> IA["patron/request/page.tsx"]
+    A --> J["concierge/page.tsx"]
+    A --> JA["concierge/requests/page.tsx"]
+    A --> K["driver/page.tsx"]
+    A --> KA["driver/opportunities/page.tsx"]
+    A --> L["admin/page.tsx"]
+    A --> LA["admin/users/page.tsx"]
+    A --> M["theme-provider.tsx"]
+    A --> N["components/"]
+    A --> O["auth/actions.ts"]
+    B --> P["Wraps every route"]
 ```
 
 The current app defines these URLs:
@@ -41,6 +47,12 @@ The current app defines these URLs:
 - `app/sign-up/page.tsx` -> `/sign-up`
 - `app/sign-in/page.tsx` -> `/sign-in`
 - `app/dashboard/page.tsx` -> `/dashboard`
+- `app/patron/page.tsx` -> `/patron`
+- `app/patron/request/page.tsx` -> `/patron/request`
+- `app/concierge/page.tsx` -> `/concierge`
+- `app/concierge/requests/page.tsx` -> `/concierge/requests`
+- `app/driver/page.tsx` -> `/driver`
+- `app/driver/opportunities/page.tsx` -> `/driver/opportunities`
 - `app/admin/page.tsx` -> `/admin`
 - `app/admin/users/page.tsx` -> `/admin/users`
 
@@ -68,7 +80,9 @@ In this app:
 
 - `app/layout.tsx` wraps every route in the app
 - that includes `/`, `/about`, `/contact`, `/sign-up`, `/sign-in`,
-  `/dashboard`, `/admin`, and `/admin/users`
+  `/dashboard`, `/patron`, `/patron/request`, `/concierge`,
+  `/concierge/requests`, `/driver`, `/driver/opportunities`, `/admin`, and
+  `/admin/users`
 
 ## Files That Do Not Create Routes
 
@@ -80,6 +94,7 @@ Examples:
 - `components/top-nav.tsx`: shared navigation component
 - `components/dashboard-shell.tsx`: shared app-area layout for dashboard pages
 - `components/click-counter.tsx`: reusable component
+- `components/linear-stat-clock.tsx`: reusable homepage statistic component
 - `auth/actions.ts`: server actions for sign in, sign up, and sign out
 - `admin/users/actions.ts`: server actions for admin user management
 - `globals.css`: global CSS file imported by the layout
@@ -99,19 +114,32 @@ apps/web/app/
 │       └── page.tsx
 ├── auth/
 │   └── actions.ts
+├── concierge/
+│   ├── page.tsx
+│   └── requests/
+│       └── page.tsx
 ├── components/
 │   ├── auth-message.tsx
 │   ├── click-counter.tsx
 │   ├── dashboard-shell.tsx
+│   ├── linear-stat-clock.tsx
 │   ├── page-header.tsx
 │   └── top-nav.tsx
 ├── contact/
 │   └── page.tsx
 ├── dashboard/
 │   └── page.tsx
+├── driver/
+│   ├── opportunities/
+│   │   └── page.tsx
+│   └── page.tsx
 ├── globals.css
 ├── layout.tsx
 ├── page.tsx
+├── patron/
+│   ├── page.tsx
+│   └── request/
+│       └── page.tsx
 ├── sign-in/
 │   └── page.tsx
 ├── sign-up/

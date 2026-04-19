@@ -29,6 +29,12 @@ flowchart TD
     B --> R["sign-up/page.tsx"]
     B --> S["sign-in/page.tsx"]
     B --> T["dashboard/page.tsx"]
+    B --> TA["patron/page.tsx"]
+    B --> TB["patron/request/page.tsx"]
+    B --> TC["concierge/page.tsx"]
+    B --> TD["concierge/requests/page.tsx"]
+    B --> TE["driver/page.tsx"]
+    B --> TF["driver/opportunities/page.tsx"]
     B --> U["admin/page.tsx"]
     B --> UA["admin/users/page.tsx"]
     B --> V["auth/actions.ts"]
@@ -68,6 +74,7 @@ Important files here include:
 - `theme-provider.tsx`
 - `globals.css`
 - route files such as `page.tsx` and `about/page.tsx`
+- role-specific route files such as `driver/page.tsx` and `patron/request/page.tsx`
 - nested admin files such as `admin/users/page.tsx`
 - shared UI in `components/`
 
@@ -205,6 +212,13 @@ It uses Material UI layout components and `next/image` to show:
   stat row
 - a second arrests section with the same layout style
 
+It also links into the signed-in app area, where the left nav now includes:
+
+- `Patron`
+- `Concierge`
+- `Driver`
+- `Admin`
+
 The image asset for that hero lives in:
 
 - `apps/web/public/images/pulled-over.jpg`
@@ -314,8 +328,12 @@ It is used by the dashboard-related pages so they can share:
 - a main content panel
 - a theme-aware nav surface that works in both light and dark mode
 
-It also supports a nested admin subsection, so `Admin` can expand to show
-`Users`.
+It also supports nested role subsections, so:
+
+- `Patron` can expand to show `Request Ride`
+- `Concierge` can expand to show `Ride Requests`
+- `Driver` can expand to show `Opportunities`
+- `Admin` can expand to show `Users`
 
 There is a dedicated guide for this file in
 [`docs/web/components/dashboard-shell.md`](./components/dashboard-shell.md).

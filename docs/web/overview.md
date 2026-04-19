@@ -44,6 +44,7 @@ pieces:
 - public pages such as Home, About, and Contact
 - auth pages for sign up and sign in
 - a protected dashboard page
+- signed-in role sections for patrons, concierges, and drivers
 - an admin-only page
 - a shared top navigation
 - a light and dark theme toggle

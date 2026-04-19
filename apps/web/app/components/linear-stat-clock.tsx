@@ -57,14 +57,19 @@ export default function LinearStatClock({
   leftTitle,
   overline
 }: LinearStatClockProps) {
-  const [remainingMs, setRemainingMs] = useState(() => getRemainingMs(intervalMs));
+  const [remainingMs, setRemainingMs] = useState(intervalMs);
 
   useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      setRemainingMs(getRemainingMs(intervalMs));
+    });
+
     const timer = window.setInterval(() => {
       setRemainingMs(getRemainingMs(intervalMs));
     }, 1000);
 
     return () => {
+      window.cancelAnimationFrame(frame);
       window.clearInterval(timer);
     };
   }, [intervalMs]);

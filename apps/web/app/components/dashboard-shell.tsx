@@ -20,6 +20,36 @@ const navigationItems = [
     label: "Dashboard"
   },
   {
+    href: "/patron",
+    label: "Patron",
+    children: [
+      {
+        href: "/patron/request",
+        label: "Request Ride"
+      }
+    ]
+  },
+  {
+    href: "/concierge",
+    label: "Concierge",
+    children: [
+      {
+        href: "/concierge/requests",
+        label: "Ride Requests"
+      }
+    ]
+  },
+  {
+    href: "/driver",
+    label: "Driver",
+    children: [
+      {
+        href: "/driver/opportunities",
+        label: "Opportunities"
+      }
+    ]
+  },
+  {
     href: "/admin",
     label: "Admin",
     children: [

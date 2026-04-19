@@ -1,0 +1,17 @@
+# Concierge Requests Page Guide
+
+This guide explains `apps/web/app/concierge/requests/page.tsx`.
+
+## What This File Does
+
+This file creates the `/concierge/requests` page.
+
+It is the first drill-down page inside the concierge section.
+
+## Main Ideas
+
+- it checks for a signed-in user on the server
+- it redirects to `/sign-in` if there is no user
+- it renders inside `DashboardShell`
+- it acts as the starter page for concierge-managed ride requests
+

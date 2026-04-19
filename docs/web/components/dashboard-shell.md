@@ -27,6 +27,36 @@ const navigationItems = [
     label: "Dashboard"
   },
   {
+    href: "/patron",
+    label: "Patron",
+    children: [
+      {
+        href: "/patron/request",
+        label: "Request Ride"
+      }
+    ]
+  },
+  {
+    href: "/concierge",
+    label: "Concierge",
+    children: [
+      {
+        href: "/concierge/requests",
+        label: "Ride Requests"
+      }
+    ]
+  },
+  {
+    href: "/driver",
+    label: "Driver",
+    children: [
+      {
+        href: "/driver/opportunities",
+        label: "Opportunities"
+      }
+    ]
+  },
+  {
     href: "/admin",
     label: "Admin",
     children: [
@@ -203,21 +233,22 @@ export default function DashboardShell({
 ## What This Component Does
 
 This component creates the shared app-area layout for pages like `/dashboard`,
-`/admin`, and `/admin/users`.
+`/patron`, `/concierge`, `/driver`, `/admin`, and `/admin/users`.
 
 It provides:
 
 - a permanent left navigation on desktop
 - a temporary left drawer on mobile
-- a nested admin subsection
+- nested role subsections
 - a main content surface on the right
 - theme-aware nav colors for both light and dark mode
 
 ## Key Ideas
 
 - the dashboard area has its own layout inside the main app
+- `Patron`, `Concierge`, and `Driver` behave like parent items in the left nav
 - `Admin` behaves like a parent item in the left nav
-- `Users` appears as a nested link under `Admin`
+- child links appear nested under each parent item
 - on mobile, the drawer opens when the top nav dispatches a
   `"dashboard-nav:open"` browser event
 - the current route controls which items appear selected and which submenu is
@@ -231,7 +262,13 @@ flowchart TD
     A --> C["Mobile: temporary left drawer"]
     C --> D["Opened from TopNav menu icon"]
     B --> E["Dashboard link"]
-    B --> F["Admin link"]
-    F --> G["Users nested link"]
-    A --> H["Right-side paper content"]
+    B --> F["Patron parent link"]
+    B --> G["Concierge parent link"]
+    B --> H["Driver parent link"]
+    B --> I["Admin parent link"]
+    F --> J["Request Ride nested link"]
+    G --> K["Ride Requests nested link"]
+    H --> L["Opportunities nested link"]
+    I --> M["Users nested link"]
+    A --> N["Right-side paper content"]
 ```
