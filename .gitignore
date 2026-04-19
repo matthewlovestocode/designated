@@ -6,3 +6,4 @@ coverage
 *.tsbuildinfo
 .env.local
 supabase/.temp
+apps/web/supabase/.temp
