@@ -21,6 +21,8 @@ the files do and how React, Next.js, Material UI, and Supabase fit together.
   the Supabase files and auth flow.
 - [Routing Guide](./routing.md): how Next.js App Router maps URLs to folders
   and files.
+- [API Routes Guide](./api-routes.md): how App Router server endpoints such as
+  `/api/health` work.
 - [How Rendering Works](./rendering.md): how React and Next.js turn code into a
   page and update it after state changes.
 

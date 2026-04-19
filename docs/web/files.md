@@ -37,6 +37,7 @@ flowchart TD
     B --> TF["driver/opportunities/page.tsx"]
     B --> U["admin/page.tsx"]
     B --> UA["admin/users/page.tsx"]
+    B --> UB["api/health/route.ts"]
     B --> V["auth/actions.ts"]
     B --> W["components/"]
     C --> X["supabase/"]
@@ -74,6 +75,7 @@ Important files here include:
 - `theme-provider.tsx`
 - `globals.css`
 - route files such as `page.tsx` and `about/page.tsx`
+- API route files such as `api/health/route.ts`
 - role-specific route files such as `driver/page.tsx` and `patron/request/page.tsx`
 - nested admin files such as `admin/users/page.tsx`
 - shared UI in `components/`
@@ -222,6 +224,17 @@ It also links into the signed-in app area, where the left nav now includes:
 The image asset for that hero lives in:
 
 - `apps/web/public/images/pulled-over.jpg`
+
+## `apps/web/app/api/health/route.ts`
+
+This file defines the external health endpoint at `/api/health`.
+
+It is not a page.
+
+It is a server route that responds to HTTP requests with JSON.
+
+Right now it returns a small healthy-status payload for monitoring or simple
+external checks.
 
 ## `apps/web/app/components/page-header.tsx`
 

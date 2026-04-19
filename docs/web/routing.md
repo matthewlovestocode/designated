@@ -9,6 +9,7 @@ In App Router:
 
 - folders usually represent route segments
 - `page.tsx` files usually represent pages
+- `route.ts` files usually represent API endpoints
 - `layout.tsx` files wrap pages in the same folder and below it
 - regular helper files do not create routes
 
@@ -33,10 +34,11 @@ flowchart TD
     A --> KA["driver/opportunities/page.tsx"]
     A --> L["admin/page.tsx"]
     A --> LA["admin/users/page.tsx"]
-    A --> M["theme-provider.tsx"]
-    A --> N["components/"]
-    A --> O["auth/actions.ts"]
-    B --> P["Wraps every route"]
+    A --> M["api/health/route.ts"]
+    A --> N["theme-provider.tsx"]
+    A --> O["components/"]
+    A --> P["auth/actions.ts"]
+    B --> Q["Wraps every route"]
 ```
 
 The current app defines these URLs:
@@ -55,6 +57,7 @@ The current app defines these URLs:
 - `app/driver/opportunities/page.tsx` -> `/driver/opportunities`
 - `app/admin/page.tsx` -> `/admin`
 - `app/admin/users/page.tsx` -> `/admin/users`
+- `app/api/health/route.ts` -> `/api/health`
 
 ## How Next.js Thinks About It
 
@@ -101,6 +104,18 @@ Examples:
 
 These files support routing, but they are not routes themselves.
 
+## API Routes Are Also Routes
+
+Not every route in App Router is a page.
+
+`route.ts` files create API endpoints.
+
+In this app:
+
+- `app/api/health/route.ts` creates `/api/health`
+
+That route returns JSON instead of HTML.
+
 ## Current App Structure
 
 ```text
@@ -112,6 +127,9 @@ apps/web/app/
 │   └── users/
 │       ├── actions.ts
 │       └── page.tsx
+├── api/
+│   └── health/
+│       └── route.ts
 ├── auth/
 │   └── actions.ts
 ├── concierge/
