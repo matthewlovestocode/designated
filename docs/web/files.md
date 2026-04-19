@@ -29,6 +29,7 @@ flowchart TD
     B --> R["sign-up/page.tsx"]
     B --> S["sign-in/page.tsx"]
     B --> T["dashboard/page.tsx"]
+    B --> T1["dashboard/actions.ts"]
     B --> TA["patron/page.tsx"]
     B --> TB["patron/request/page.tsx"]
     B --> TC["concierge/page.tsx"]
@@ -45,6 +46,7 @@ flowchart TD
     C --> X["supabase/"]
     C --> XA["admin-access.ts"]
     C --> XB["driver-availability.ts"]
+    C --> XC["roles.ts"]
     D --> Y["add-admin.mjs"]
 ```
 
@@ -81,6 +83,7 @@ Important files here include:
 - API route files such as `api/health/route.ts`
 - role-specific route files such as `driver/page.tsx` and `patron/request/page.tsx`
 - nested admin files such as `admin/users/page.tsx`
+- dashboard server actions such as `dashboard/actions.ts`
 - shared UI in `components/`
 
 ## `apps/web/app/components/`
@@ -106,6 +109,16 @@ Right now it contains:
 Most of these components use Material UI building blocks such as `Typography`,
 `Stack`, `Button`, `Menu`, and `Alert`.
 
+## `apps/web/app/dashboard/`
+
+This folder now holds dashboard-specific route files and server actions.
+
+Right now it contains:
+
+- `page.tsx`: the dashboard page with current-role display and self-serve mode toggles
+- `actions.ts`: server actions for turning `patron`, `concierge`, and `driver`
+  modes on or off for the signed-in user
+
 ## `apps/web/lib/`
 
 This folder holds helper code that is not itself a page or visual component.
@@ -115,6 +128,7 @@ In this app, the most important part is:
 - `lib/supabase/`: helpers for browser, server, proxy, env, and admin access
 - `lib/admin-access.ts`: shared admin permission helpers
 - `lib/driver-availability.ts`: shared distance and nearby-driver lookup logic
+- `lib/roles.ts`: shared role parsing, normalization, and role-protection helpers
 
 ## `apps/web/app/availability/`
 
@@ -122,7 +136,8 @@ This folder holds server actions for rider-side nearby-driver lookups.
 
 Right now it contains:
 
-- `actions.ts`: looks up nearby drivers for the current signed-in user
+- `actions.ts`: looks up nearby drivers for the current signed-in user after
+  verifying that the user has the matching rider role
 
 ## `apps/web/app/ride-requests/`
 
@@ -139,6 +154,7 @@ The request actions now also:
 
 - prevent duplicate active requests for the same creator and role
 - store lifecycle timestamps for claimed, completed, and cancelled states
+- enforce rider and driver permissions on the server
 
 ## `apps/web/supabase/migrations/`
 
@@ -196,6 +212,9 @@ Important scripts:
 - `coverage`: run Vitest with coverage enabled
 - `db:types`: regenerate Supabase TypeScript types
 - `make-admin`: run the admin-grant script
+
+The app now also depends on role metadata stored in Supabase auth
+`app_metadata`, which is read by `lib/roles.ts`.
 
 Important dependencies:
 

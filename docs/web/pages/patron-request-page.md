@@ -12,6 +12,7 @@ It is the first drill-down page inside the patron section.
 
 - it checks for a signed-in user on the server
 - it redirects to `/sign-in` if there is no user
+- it redirects to `/dashboard` if the signed-in user does not currently have the `patron` role
 - it renders inside `DashboardShell`
 - it lets the patron look up nearby available drivers
 - it lets the patron create a persisted ride request

@@ -78,6 +78,15 @@ The current product workflow depends on both tables:
 - lifecycle fields on `ride_requests` help show when a request was claimed,
   completed, or cancelled
 
+The app also depends on auth role metadata in Supabase users:
+
+- `role`: a primary role string used as a simple shortcut
+- `roles`: an array of app roles such as `patron`, `concierge`, `driver`, and
+  `admin`
+
+For MVP, new users start with `patron`, and signed-in users can enable or
+disable `patron`, `concierge`, and `driver` for themselves from the dashboard.
+
 ## Which Helper To Use
 
 Use the browser client in client components:
@@ -134,6 +143,25 @@ Important safety note:
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` is for normal app usage
 - `SUPABASE_SECRET_KEY` is for trusted server-side admin work only
 - never expose the secret key in browser code
+
+## Role Metadata
+
+This app now uses Supabase auth `app_metadata` as the source of truth for app
+roles.
+
+The shared helper for this is:
+
+- `apps/web/lib/roles.ts`
+
+That file:
+
+- reads `role` and `roles`
+- normalizes them into a predictable role list
+- lets the app check whether a user has a required role
+- redirects users away from pages they should not use
+
+This is why server-side role enforcement works even if someone tries to skip
+the normal UI and submit a form directly.
 
 ## Official Sources
 

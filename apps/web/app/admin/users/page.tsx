@@ -10,11 +10,14 @@ import AuthMessage from "../../components/auth-message";
 import DashboardShell from "../../components/dashboard-shell";
 import PageHeader from "../../components/page-header";
 import {
+  assignUserRole,
   deleteUserAccount,
   demoteUserFromAdmin,
+  removeUserRole,
   promoteUserToAdmin
 } from "./actions";
-import { isAdmin, requireAdminUser } from "../../../lib/admin-access";
+import { requireAdminUser } from "../../../lib/admin-access";
+import { APP_ROLES, getRoles, isAdmin } from "../../../lib/roles";
 import { createAdminClient } from "../../../lib/supabase/admin";
 
 export default async function AdminUsersPage({
@@ -58,6 +61,8 @@ export default async function AdminUsersPage({
             {users.map((user) => {
               const admin = isAdmin(user);
               const isCurrentAdmin = user.id === currentAdmin.id;
+              const roles = getRoles(user.app_metadata);
+              const nonAdminRoles = APP_ROLES.filter((role) => role !== "admin");
 
               return (
                 <TableRow key={user.id}>
@@ -69,7 +74,9 @@ export default async function AdminUsersPage({
                       </Typography>
                     </Stack>
                   </TableCell>
-                  <TableCell>{admin ? "Admin" : "User"}</TableCell>
+                  <TableCell>
+                    {roles.length ? roles.join(", ") : admin ? "Admin" : "User"}
+                  </TableCell>
                   <TableCell>
                     {user.email_confirmed_at ? "Confirmed" : "Pending"}
                   </TableCell>
@@ -107,6 +114,35 @@ export default async function AdminUsersPage({
                             Promote
                           </Button>
                         </Stack>
+                      )}
+                      {nonAdminRoles.map((role) =>
+                        roles.includes(role) ? (
+                          <Stack
+                            key={`${user.id}-${role}-remove`}
+                            component="form"
+                            action={removeUserRole}
+                            direction="row"
+                          >
+                            <input name="role" type="hidden" value={role} />
+                            <input name="userId" type="hidden" value={user.id} />
+                            <Button size="small" type="submit" variant="outlined">
+                              Remove {role}
+                            </Button>
+                          </Stack>
+                        ) : (
+                          <Stack
+                            key={`${user.id}-${role}-assign`}
+                            component="form"
+                            action={assignUserRole}
+                            direction="row"
+                          >
+                            <input name="role" type="hidden" value={role} />
+                            <input name="userId" type="hidden" value={user.id} />
+                            <Button size="small" type="submit" variant="outlined">
+                              Make {role}
+                            </Button>
+                          </Stack>
+                        )
                       )}
                       <Stack
                         component="form"

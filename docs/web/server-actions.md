@@ -28,6 +28,7 @@ Examples:
 - reading or writing secure cookies
 - calling a database with secret credentials
 - promoting a user to admin
+- turning `driver` mode on for yourself
 - deleting a user account
 
 If that code ran in the browser, secrets could be exposed.
@@ -183,16 +184,26 @@ That is why the admin-user-management actions belong on the server.
 For example, promoting or deleting users should never be done directly from the
 browser with a secret key.
 
+The same is now true for role-sensitive MVP actions such as:
+
+- turning `patron`, `concierge`, or `driver` mode on or off
+- creating a patron or concierge ride request
+- claiming or completing a request as a driver
+
 ## Server Action Example Types In This Repo
 
 This app already uses server actions for a few different jobs:
 
 - auth actions in `apps/web/app/auth/actions.ts`
 - admin user-management actions in `apps/web/app/admin/users/actions.ts`
+- dashboard self-role actions in `apps/web/app/dashboard/actions.ts`
+- rider and driver workflow actions in `apps/web/app/ride-requests/actions.ts`
+- nearby-driver lookup actions in `apps/web/app/availability/actions.ts`
 
-That means the same idea is used for both:
+That means the same idea is used for:
 
 - normal signed-in user flows
+- protected role-based flows
 - protected admin-only flows
 
 ## How Redirects Fit In
@@ -209,6 +220,7 @@ In this project:
 
 - successful sign-in redirects to `/dashboard`
 - sign-out redirects to `/sign-in`
+- self-role changes redirect back to `/dashboard` with a confirmation message
 - admin actions redirect back to `/admin/users` with a message
 
 ## Beginner Mental Model
@@ -229,3 +241,5 @@ If you want the simplest mental model, think of server actions like this:
   gets a Supabase client
 - [Admin Access Guide](./supabase/admin-access.md): how admin-only server logic
   is protected
+- [Dashboard Page Guide](./pages/dashboard-page.md): how users can now manage
+  their own non-admin modes

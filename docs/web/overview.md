@@ -7,7 +7,7 @@ It is a Next.js app that uses:
 - React for components
 - App Router for file-based routing
 - Material UI for visual components and theming
-- Supabase for authentication and user/session work
+- Supabase for authentication, user/session work, and role metadata
 
 ## How It Fits Into The Monorepo
 
@@ -44,6 +44,7 @@ pieces:
 - public pages such as Home, About, and Contact
 - auth pages for sign up and sign in
 - a protected dashboard page
+- self-serve role toggles for `patron`, `concierge`, and `driver`
 - signed-in role sections for patrons, concierges, and drivers
 - driver availability with location and radius
 - persisted ride requests for patrons and concierges
@@ -88,6 +89,7 @@ If you want to learn this project step by step, this is a useful path:
 8. `apps/web/lib/supabase/server.ts`
 9. `apps/web/app/driver/actions.ts`
 10. `apps/web/app/ride-requests/actions.ts`
+11. `apps/web/lib/roles.ts`
 
 That path shows:
 
@@ -102,6 +104,7 @@ That path shows:
 - how ride requests move through the app
 - how maps now support all three active role workflows
 - how basic MVP guardrails keep the workflow from becoming noisy
+- how shared role helpers turn auth metadata into app-level permissions
 
 ## Visual Learning Map
 
@@ -115,6 +118,7 @@ flowchart LR
     K["click-counter.tsx"] --> L["State and re-rendering"]
     M["driver/actions.ts"] --> N["Driver availability flow"]
     O["ride-requests/actions.ts"] --> P["Persisted ride request flow"]
+    Q["roles.ts"] --> R["Shared role parsing and protection"]
 ```
 
 ## Source Files And Generated Files

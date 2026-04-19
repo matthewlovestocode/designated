@@ -1,6 +1,5 @@
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import { redirect } from "next/navigation";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import DashboardShell from "../../components/dashboard-shell";
@@ -9,17 +8,15 @@ import PageHeader from "../../components/page-header";
 import RideRequestList from "../../ride-requests/ride-request-list";
 import type { Tables } from "../../../lib/supabase/database.types";
 import { getDistanceMiles } from "../../../lib/driver-availability";
+import { requireUserWithRole } from "../../../lib/roles";
 import { createClient } from "../../../lib/supabase/server";
 
 export default async function DriverOpportunitiesPage() {
+  const user = await requireUserWithRole("driver", {
+    signedInMessage: "Please sign in to view driver opportunities.",
+    unauthorizedMessage: "Driver access required."
+  });
   const supabase = await createClient();
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect("/sign-in?message=Please sign in to view driver opportunities.");
-  }
 
   const { data: requests } = await supabase
     .from("ride_requests")

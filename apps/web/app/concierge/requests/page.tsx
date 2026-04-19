@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import DashboardShell from "../../components/dashboard-shell";
@@ -6,17 +5,15 @@ import NearbyDriversCard from "../../components/nearby-drivers-card";
 import PageHeader from "../../components/page-header";
 import RequestRideCard from "../../ride-requests/request-ride-card";
 import RideRequestList from "../../ride-requests/ride-request-list";
+import { requireUserWithRole } from "../../../lib/roles";
 import { createClient } from "../../../lib/supabase/server";
 
 export default async function ConciergeRequestsPage() {
+  const user = await requireUserWithRole("concierge", {
+    signedInMessage: "Please sign in to view ride requests.",
+    unauthorizedMessage: "Concierge access required."
+  });
   const supabase = await createClient();
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect("/sign-in?message=Please sign in to view ride requests.");
-  }
 
   const { data: requests } = await supabase
     .from("ride_requests")

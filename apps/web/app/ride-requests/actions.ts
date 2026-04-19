@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "../../lib/supabase/admin";
+import { hasRole, isAdmin } from "../../lib/roles";
 import { createClient } from "../../lib/supabase/server";
 import type { TablesInsert } from "../../lib/supabase/database.types";
 
@@ -38,6 +39,13 @@ export async function createRideRequest(input: CreateRideRequestInput) {
   }
 
   const { supabase, user } = await getSignedInUser();
+
+  if (!hasRole(user, input.requestedByRole) && !isAdmin(user)) {
+    throw new Error(
+      `You need the ${input.requestedByRole} role to create that kind of ride request.`
+    );
+  }
+
   const { data: existingRequest, error: existingRequestError } = await supabase
     .from("ride_requests")
     .select("id")
@@ -114,6 +122,10 @@ export async function claimRideRequest(requestId: string) {
     throw new Error("Please sign in to claim ride requests.");
   }
 
+  if (!hasRole(user, "driver") && !isAdmin(user)) {
+    throw new Error("You need the driver role to claim ride requests.");
+  }
+
   const admin = createAdminClient();
   const { data: request, error: fetchError } = await admin
     .from("ride_requests")
@@ -156,6 +168,10 @@ export async function completeRideRequest(requestId: string) {
 
   if (!user) {
     throw new Error("Please sign in to complete ride requests.");
+  }
+
+  if (!hasRole(user, "driver") && !isAdmin(user)) {
+    throw new Error("You need the driver role to complete ride requests.");
   }
 
   const admin = createAdminClient();

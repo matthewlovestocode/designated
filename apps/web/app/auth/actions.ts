@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "../../lib/supabase/server";
+import { normalizeRoleMetadata } from "../../lib/roles";
 
 function getAuthData(formData: FormData) {
   const email = formData.get("email");
@@ -20,7 +21,10 @@ export async function signUp(formData: FormData) {
 
   const { error } = await supabase.auth.signUp({
     email,
-    password
+    password,
+    options: {
+      data: normalizeRoleMetadata(["patron"])
+    }
   });
 
   if (error) {

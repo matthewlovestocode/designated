@@ -12,6 +12,7 @@ It is a signed-in app page for designated drivers.
 
 - it checks for a signed-in user on the server
 - it redirects to `/sign-in` if there is no user
+- it redirects to `/dashboard` if the signed-in user does not currently have the `driver` role
 - it renders inside `DashboardShell`
 - it loads the current driver's saved availability from Supabase
 - it passes that data into `DriverAvailabilityCard`

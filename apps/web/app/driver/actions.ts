@@ -2,6 +2,7 @@
 
 import { createClient } from "../../lib/supabase/server";
 import type { TablesInsert } from "../../lib/supabase/database.types";
+import { hasRole, isAdmin } from "../../lib/roles";
 
 const ALLOWED_RADIUS_MILES = new Set([5, 10, 15, 25]);
 const AVAILABILITY_WINDOW_MS = 15 * 60 * 1000;
@@ -50,6 +51,10 @@ async function getSignedInUser() {
 
   if (!user) {
     throw new Error("Please sign in to manage driver availability.");
+  }
+
+  if (!hasRole(user, "driver") && !isAdmin(user)) {
+    throw new Error("You need the driver role to manage driver availability.");
   }
 
   return { supabase, user };

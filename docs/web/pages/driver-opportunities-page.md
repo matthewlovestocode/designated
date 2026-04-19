@@ -12,6 +12,7 @@ It is the first drill-down page inside the driver section.
 
 - it checks for a signed-in user on the server
 - it redirects to `/sign-in` if there is no user
+- it redirects to `/dashboard` if the signed-in user does not currently have the `driver` role
 - it renders inside `DashboardShell`
 - it loads persisted ride requests from Supabase
 - it separates open requests from requests already claimed by the current driver

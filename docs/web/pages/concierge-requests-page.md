@@ -12,6 +12,7 @@ It is the first drill-down page inside the concierge section.
 
 - it checks for a signed-in user on the server
 - it redirects to `/sign-in` if there is no user
+- it redirects to `/dashboard` if the signed-in user does not currently have the `concierge` role
 - it renders inside `DashboardShell`
 - it lets the concierge check nearby available drivers at the pickup location
 - it lets the concierge create a persisted ride request

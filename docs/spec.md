@@ -50,6 +50,12 @@ That framing is reflected in the current landing page, which emphasizes:
 
 The current product model includes four primary user roles.
 
+For MVP, these roles are not treated as rigid real-world identities.
+
+`admin` is still special and restricted, but `patron`, `concierge`, and
+`driver` are now modeled more like app modes or capabilities a person can turn
+on for themselves.
+
 ### `admin`
 
 An internal administrator of the web application.
@@ -64,11 +70,15 @@ with a driver for a patron.
 
 This role represents the establishment side of the workflow.
 
+For MVP, a user can self-enable this role from the dashboard.
+
 ### `driver`
 
 A driver seeking to pick up a patron from a bar.
 
 This role represents the supply side of the workflow.
+
+For MVP, a user can self-enable this role from the dashboard.
 
 ### `patron`
 
@@ -76,6 +86,8 @@ An individual at a bar, looking for a designated driver due to having too much
 to drink.
 
 This role represents the person in need of the ride.
+
+New accounts currently start with this role by default.
 
 ## Current Role Areas
 
@@ -89,6 +101,9 @@ The app now has early role-based navigation sections for:
 Each role area currently serves as a starting point for a more complete
 workflow.
 
+For MVP, a signed-in user can move between non-admin role areas by enabling or
+disabling those modes on the dashboard.
+
 The current first-level role pages imply these intended directions:
 
 - `patron` -> request a ride, look up nearby drivers, and view saved requests
@@ -97,6 +112,20 @@ The current first-level role pages imply these intended directions:
 - `driver` -> share availability, browse persisted requests, and claim
   or complete opportunities
 - `admin` -> manage users and roles
+
+## Current Role Model
+
+The current role model is intentionally flexible.
+
+- `admin` remains restricted and is still treated as a special internal role
+- `patron`, `concierge`, and `driver` can coexist on the same account
+- new users start with `patron`
+- signed-in users can self-enable or self-disable `patron`, `concierge`, and
+  `driver` from the dashboard
+- server-side role checks now protect the role-specific pages and actions
+
+That means the MVP no longer assumes one person fits exactly one permanent
+role.
 
 ## Early Workflow Intent
 
@@ -123,6 +152,7 @@ That includes the ability to:
 - view signed-up users
 - promote a user to admin
 - demote an admin
+- grant or remove `patron`, `concierge`, and `driver` roles
 - delete a user account
 
 This means the `admin` role is no longer just conceptual in the spec. It now
@@ -143,6 +173,8 @@ has the start of a real request-and-response loop:
 - the request is stored
 - a driver can discover and claim that request
 - the request can later move to a completed state
+
+Role-specific server actions now enforce who can perform each step.
 
 ## Current Map-Based Workflow
 

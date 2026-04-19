@@ -2,6 +2,7 @@
 
 import { createClient } from "../../lib/supabase/server";
 import { findNearbyAvailableDrivers } from "../../lib/driver-availability";
+import { hasRole, isAdmin } from "../../lib/roles";
 
 type NearbyDriverLookupInput = {
   latitude: number;
@@ -24,6 +25,14 @@ export async function lookupNearbyDrivers(input: NearbyDriverLookupInput) {
 
   if (!user) {
     throw new Error("Please sign in to look up nearby drivers.");
+  }
+
+  if (
+    !isAdmin(user) &&
+    !hasRole(user, "patron") &&
+    !hasRole(user, "concierge")
+  ) {
+    throw new Error("You need the patron or concierge role to look up nearby drivers.");
   }
 
   const drivers = await findNearbyAvailableDrivers(input);

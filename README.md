@@ -25,6 +25,8 @@ The current app direction focuses on:
 - letting patrons and concierges use location-aware maps while requesting help
 - letting drivers share availability, view mapped opportunities, claim requests,
   and complete claimed rides
+- letting signed-in users turn `patron`, `concierge`, and `driver` modes on or
+  off for themselves from the dashboard
 - giving admins a path to manage users and roles
 
 For a fuller product-direction document, see [docs/spec.md](./docs/spec.md).
@@ -71,6 +73,8 @@ The current app already supports an early end-to-end safety workflow:
    zoomed-in map
 4. a `driver` can review mapped opportunities, claim an open request, and mark
    it completed
+5. a signed-in user can enable or disable their own non-admin modes from the
+   dashboard without waiting for admin approval
 
 ## Environment Files
 

@@ -58,6 +58,9 @@ This file renders the `/sign-up` page.
 
 It shows a form that submits to the `signUp` server action.
 
+New users currently start with `patron` mode by default after account
+creation.
+
 ## Line By Line
 
 The structure is almost the same as the Sign In page, so it is a good beginner
@@ -117,5 +120,6 @@ This gives users a path to the sign-in page if they already have an account.
 flowchart LR
     A["User enters email and password"] --> B["Form submits to signUp"]
     B --> C["Server action calls Supabase"]
-    C --> D["Redirect with message"]
+    C --> D["Supabase user gets default patron role metadata"]
+    D --> E["Redirect with message"]
 ```
