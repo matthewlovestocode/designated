@@ -135,6 +135,11 @@ Right now it contains:
 - `ride-request-list.tsx`: shared list UI for patron, concierge, and driver views
 - `pickup-location-map.tsx`: concierge pickup-point map picker
 
+The request actions now also:
+
+- prevent duplicate active requests for the same creator and role
+- store lifecycle timestamps for claimed, completed, and cancelled states
+
 ## `apps/web/supabase/migrations/`
 
 This folder holds database migrations for the web app.
@@ -143,6 +148,8 @@ Right now it includes:
 
 - `create_driver_availability.sql`: driver radius and live availability storage
 - `create_ride_requests.sql`: persisted patron and concierge ride requests
+- `add_ride_request_lifecycle_fields.sql`: timestamps for claim, complete, and
+  cancel events
 
 ## `apps/web/scripts/`
 

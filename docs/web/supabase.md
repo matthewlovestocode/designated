@@ -47,6 +47,12 @@ The app now expects at least these persisted Supabase tables:
 - `driver_availability`
 - `ride_requests`
 
+The current `ride_requests` table now also carries lifecycle timing fields:
+
+- `claimed_at`
+- `completed_at`
+- `cancelled_at`
+
 The migration files live in:
 
 - `apps/web/supabase/migrations/`
@@ -69,6 +75,8 @@ The current product workflow depends on both tables:
 
 - `driver_availability` powers radius-based driver visibility
 - `ride_requests` powers persisted patron and concierge pickup requests
+- lifecycle fields on `ride_requests` help show when a request was claimed,
+  completed, or cancelled
 
 ## Which Helper To Use
 

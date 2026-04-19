@@ -17,3 +17,4 @@ It is the first drill-down page inside the patron section.
 - it lets the patron create a persisted ride request
 - it lists the patron's saved ride requests
 - it uses the current device location for both lookup and request creation
+- it prevents the patron from creating duplicate active requests

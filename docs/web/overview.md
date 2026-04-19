@@ -50,6 +50,8 @@ pieces:
 - driver opportunities backed by saved ride requests
 - map-based UI for driver coverage and rider-side nearby-driver lookup
 - map-based pickup selection for concierge-created requests
+- duplicate-request guardrails for active rider-side requests
+- lifecycle tracking for claimed, completed, and cancelled requests
 - an admin-only page
 - a shared top navigation
 - a light and dark theme toggle
@@ -99,6 +101,7 @@ That path shows:
 - how persisted availability is stored
 - how ride requests move through the app
 - how maps now support all three active role workflows
+- how basic MVP guardrails keep the workflow from becoming noisy
 
 ## Visual Learning Map
 

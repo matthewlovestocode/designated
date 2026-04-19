@@ -18,3 +18,5 @@ It is the first drill-down page inside the driver section.
 - it renders `OpportunitiesMap`
 - it lets a signed-in driver claim an open request
 - it lets a signed-in driver mark a matched request completed
+- it prioritizes requests inside the driver's current active radius
+- it hides out-of-range open requests by default and reports how many were hidden
