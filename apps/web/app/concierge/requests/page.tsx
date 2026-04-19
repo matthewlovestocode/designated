@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import DashboardShell from "../../components/dashboard-shell";
+import NearbyDriversCard from "../../components/nearby-drivers-card";
 import PageHeader from "../../components/page-header";
 import { createClient } from "../../../lib/supabase/server";
 
@@ -17,14 +18,17 @@ export default async function ConciergeRequestsPage() {
 
   return (
     <DashboardShell>
-      <Stack spacing={2}>
+      <Stack spacing={3}>
         <PageHeader heading="Ride Requests" />
         <Typography>
-          This page will let concierge staff view and coordinate ride requests.
+          Concierge staff can use this page to check for currently available drivers
+          near the pickup location.
         </Typography>
-        <Typography>
-          It is the first drill-down page inside the concierge section.
-        </Typography>
+        <NearbyDriversCard
+          description="Use the current device location to see which available drivers already cover this area."
+          emptyMessage="No currently available drivers were found within reach of this location."
+          heading="Nearby Drivers"
+        />
       </Stack>
     </DashboardShell>
   );

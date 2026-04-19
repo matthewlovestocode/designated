@@ -1,8 +1,10 @@
 import { redirect } from "next/navigation";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import DriverAvailabilityCard from "../components/driver-availability-card";
 import DashboardShell from "../components/dashboard-shell";
 import PageHeader from "../components/page-header";
+import type { Tables } from "../../lib/supabase/database.types";
 import { createClient } from "../../lib/supabase/server";
 
 export default async function DriverPage() {
@@ -15,9 +17,19 @@ export default async function DriverPage() {
     redirect("/sign-in?message=Please sign in to view driver tools.");
   }
 
+  const { data: availability } = await supabase
+    .from("driver_availability")
+    .select("is_available, radius_miles, last_location_at, available_until")
+    .eq("driver_user_id", user.id)
+    .maybeSingle();
+  const typedAvailability: Pick<
+    Tables<"driver_availability">,
+    "available_until" | "is_available" | "last_location_at" | "radius_miles"
+  > | null = availability;
+
   return (
     <DashboardShell>
-      <Stack spacing={2}>
+      <Stack spacing={3}>
         <PageHeader heading="Driver" />
         <Typography>
           This section is for designated drivers looking for people who need a ride.
@@ -26,6 +38,14 @@ export default async function DriverPage() {
           Use the driver menu in the left navigation to move into driver-specific
           pages.
         </Typography>
+        <DriverAvailabilityCard
+          initialAvailability={{
+            availableUntil: typedAvailability?.available_until ?? null,
+            isAvailable: typedAvailability?.is_available ?? false,
+            lastLocationAt: typedAvailability?.last_location_at ?? null,
+            radiusMiles: typedAvailability?.radius_miles ?? 10
+          }}
+        />
       </Stack>
     </DashboardShell>
   );
