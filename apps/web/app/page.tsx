@@ -5,7 +5,7 @@ import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import DeathClock from "./components/death-clock";
+import LinearDeathClock from "./components/linear-death-clock";
 
 export default function Home() {
   return (
@@ -71,20 +71,7 @@ export default function Home() {
           </Stack>
         </Box>
         <Paper sx={{ p: 4 }}>
-          <Box
-            sx={{
-              alignItems: {
-                xs: "flex-start",
-                md: "center"
-              },
-              display: "grid",
-              gap: 4,
-              gridTemplateColumns: {
-                xs: "1fr",
-                md: "minmax(0, 1fr) auto"
-              }
-            }}
-          >
+          <Stack spacing={3}>
             <Stack spacing={2}>
               <Typography variant="h5">People Die From Drunk Driving</Typography>
               <Typography color="text.secondary">
@@ -96,32 +83,8 @@ export default function Home() {
                 you can put a clock to it.
               </Typography>
             </Stack>
-            <Box
-              sx={{
-                bgcolor: "background.default",
-                border: "1px solid",
-                borderColor: "divider",
-                borderRadius: 3,
-                justifySelf: {
-                  md: "end"
-                },
-                px: {
-                  xs: 2.5,
-                  sm: 3
-                },
-                py: {
-                  xs: 2.5,
-                  sm: 3
-                },
-                width: {
-                  xs: "100%",
-                  md: "auto"
-                }
-              }}
-            >
-              <DeathClock />
-            </Box>
-          </Box>
+            <LinearDeathClock />
+          </Stack>
         </Paper>
         <Paper sx={{ p: 4 }}>
           <Stack spacing={4}>
