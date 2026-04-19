@@ -21,7 +21,9 @@ export type NearbyDriver = {
   availableUntil: string;
   distanceMiles: number;
   driverUserId: string;
+  latitude: number;
   lastLocationAt: string;
+  longitude: number;
   radiusMiles: number;
 };
 
@@ -104,7 +106,9 @@ export async function findNearbyAvailableDrivers({
         availableUntil: availability.available_until as string,
         distanceMiles,
         driverUserId: availability.driver_user_id,
+        latitude: availability.latitude as number,
         lastLocationAt: availability.last_location_at as string,
+        longitude: availability.longitude as number,
         radiusMiles: availability.radius_miles
       };
     })

@@ -3,6 +3,10 @@ import NearbyDriversCard from "./nearby-drivers-card";
 
 const mockLookupNearbyDrivers = vi.fn();
 
+vi.mock("./nearby-drivers-map", () => ({
+  default: () => <div>Nearby Drivers Map</div>
+}));
+
 vi.mock("../availability/actions", () => ({
   lookupNearbyDrivers: (...args: unknown[]) => mockLookupNearbyDrivers(...args)
 }));
@@ -39,7 +43,9 @@ describe("NearbyDriversCard", () => {
           availableUntil: "2026-04-18T20:30:00.000Z",
           distanceMiles: 1.8,
           driverUserId: "driver-1",
+          latitude: 47.615,
           lastLocationAt: "2026-04-18T20:15:00.000Z",
+          longitude: -122.31,
           radiusMiles: 5
         }
       ],
@@ -65,6 +71,7 @@ describe("NearbyDriversCard", () => {
 
     expect(screen.getByText("Available Driver 1")).toBeInTheDocument();
     expect(screen.getByText("1.8 miles away")).toBeInTheDocument();
+    expect(screen.getByText("Nearby Drivers Map")).toBeInTheDocument();
   });
 
   it("shows an empty state after a successful lookup with no results", async () => {

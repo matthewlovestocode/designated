@@ -9,6 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import AvailabilityMap from "./availability-map";
 import {
   refreshDriverAvailability,
   setDriverAvailability,
@@ -22,6 +23,8 @@ type DriverAvailabilityState = {
   availableUntil: string | null;
   isAvailable: boolean;
   lastLocationAt: string | null;
+  latitude: number | null;
+  longitude: number | null;
   radiusMiles: number;
 };
 
@@ -85,6 +88,8 @@ export default function DriverAvailabilityCard({
       availableUntil: result.availableUntil,
       isAvailable: result.isAvailable,
       lastLocationAt: result.lastLocationAt,
+      latitude: result.latitude,
+      longitude: result.longitude,
       radiusMiles: result.radiusMiles
     }));
     setMessage("Driver availability updated.");
@@ -172,6 +177,13 @@ export default function DriverAvailabilityCard({
           nearby ride opportunities.
         </Typography>
       </Stack>
+
+      <AvailabilityMap
+        isAvailable={availability.isAvailable}
+        latitude={availability.latitude}
+        longitude={availability.longitude}
+        radiusMiles={availability.radiusMiles}
+      />
 
       <Stack
         direction={{ xs: "column", sm: "row" }}

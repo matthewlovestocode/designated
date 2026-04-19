@@ -5,6 +5,10 @@ const mockRefreshDriverAvailability = vi.fn();
 const mockSetDriverAvailability = vi.fn();
 const mockSetDriverUnavailable = vi.fn();
 
+vi.mock("./availability-map", () => ({
+  default: () => <div>Availability Map</div>
+}));
+
 vi.mock("../driver/actions", () => ({
   refreshDriverAvailability: (...args: unknown[]) =>
     mockRefreshDriverAvailability(...args),
@@ -50,6 +54,8 @@ describe("DriverAvailabilityCard", () => {
           availableUntil: null,
           isAvailable: false,
           lastLocationAt: null,
+          latitude: null,
+          longitude: null,
           radiusMiles: 10
         }}
       />
@@ -60,6 +66,7 @@ describe("DriverAvailabilityCard", () => {
       screen.getByText("You are currently unavailable for ride requests.")
     ).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Go Available" })).toBeInTheDocument();
+    expect(screen.getByText("Availability Map")).toBeInTheDocument();
   });
 
   it("marks the driver available with the current location", async () => {
@@ -67,6 +74,8 @@ describe("DriverAvailabilityCard", () => {
       availableUntil: "2026-04-18T20:30:00.000Z",
       isAvailable: true,
       lastLocationAt: "2026-04-18T20:15:00.000Z",
+      latitude: 47.61,
+      longitude: -122.33,
       radiusMiles: 10
     });
 
@@ -76,6 +85,8 @@ describe("DriverAvailabilityCard", () => {
           availableUntil: null,
           isAvailable: false,
           lastLocationAt: null,
+          latitude: null,
+          longitude: null,
           radiusMiles: 10
         }}
       />
@@ -109,6 +120,8 @@ describe("DriverAvailabilityCard", () => {
           availableUntil: "2026-04-18T20:30:00.000Z",
           isAvailable: true,
           lastLocationAt: "2026-04-18T20:15:00.000Z",
+          latitude: 47.61,
+          longitude: -122.33,
           radiusMiles: 15
         }}
       />
@@ -137,6 +150,8 @@ describe("DriverAvailabilityCard", () => {
           availableUntil: null,
           isAvailable: false,
           lastLocationAt: null,
+          latitude: null,
+          longitude: null,
           radiusMiles: 10
         }}
       />

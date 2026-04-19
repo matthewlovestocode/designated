@@ -86,6 +86,8 @@ export async function setDriverAvailability(input: DriverAvailabilityInput) {
     availableUntil,
     isAvailable: true,
     lastLocationAt,
+    latitude,
+    longitude,
     radiusMiles
   };
 }

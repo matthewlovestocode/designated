@@ -7,13 +7,16 @@ import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import NearbyDriversMap from "./nearby-drivers-map";
 import { lookupNearbyDrivers } from "../availability/actions";
 
 type NearbyDriver = {
   availableUntil: string;
   distanceMiles: number;
   driverUserId: string;
+  latitude: number;
   lastLocationAt: string;
+  longitude: number;
   radiusMiles: number;
 };
 
@@ -53,6 +56,8 @@ export default function NearbyDriversCard({
   const [drivers, setDrivers] = useState<NearbyDriver[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [lookedUpAt, setLookedUpAt] = useState<string | null>(null);
+  const [requesterLatitude, setRequesterLatitude] = useState<number | null>(null);
+  const [requesterLongitude, setRequesterLongitude] = useState<number | null>(null);
   const [isPending, startTransition] = useTransition();
 
   const handleLookup = () => {
@@ -68,9 +73,13 @@ export default function NearbyDriversCard({
 
         setDrivers(result.drivers);
         setLookedUpAt(result.lookedUpAt);
+        setRequesterLatitude(position.coords.latitude);
+        setRequesterLongitude(position.coords.longitude);
       } catch (error) {
         setDrivers([]);
         setLookedUpAt(null);
+        setRequesterLatitude(null);
+        setRequesterLongitude(null);
         setErrorMessage(
           error instanceof Error ? error.message : "Unable to find nearby drivers."
         );
@@ -95,6 +104,12 @@ export default function NearbyDriversCard({
           </Typography>
         ) : null}
       </Stack>
+
+      <NearbyDriversMap
+        drivers={drivers}
+        requesterLatitude={requesterLatitude}
+        requesterLongitude={requesterLongitude}
+      />
 
       {errorMessage ? <Alert severity="error">{errorMessage}</Alert> : null}
 

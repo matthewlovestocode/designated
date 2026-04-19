@@ -19,12 +19,19 @@ export default async function DriverPage() {
 
   const { data: availability } = await supabase
     .from("driver_availability")
-    .select("is_available, radius_miles, last_location_at, available_until")
+    .select(
+      "available_until, is_available, last_location_at, latitude, longitude, radius_miles"
+    )
     .eq("driver_user_id", user.id)
     .maybeSingle();
   const typedAvailability: Pick<
     Tables<"driver_availability">,
-    "available_until" | "is_available" | "last_location_at" | "radius_miles"
+    | "available_until"
+    | "is_available"
+    | "last_location_at"
+    | "latitude"
+    | "longitude"
+    | "radius_miles"
   > | null = availability;
 
   return (
@@ -43,6 +50,8 @@ export default async function DriverPage() {
             availableUntil: typedAvailability?.available_until ?? null,
             isAvailable: typedAvailability?.is_available ?? false,
             lastLocationAt: typedAvailability?.last_location_at ?? null,
+            latitude: typedAvailability?.latitude ?? null,
+            longitude: typedAvailability?.longitude ?? null,
             radiusMiles: typedAvailability?.radius_miles ?? 10
           }}
         />

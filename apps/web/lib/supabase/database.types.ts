@@ -51,6 +51,48 @@ export type Database = {
         };
         Relationships: [];
       };
+      ride_requests: {
+        Row: {
+          created_at: string;
+          created_by_user_id: string;
+          id: string;
+          matched_driver_user_id: string | null;
+          notes: string | null;
+          pickup_label: string | null;
+          pickup_latitude: number;
+          pickup_longitude: number;
+          requested_by_role: string;
+          status: string;
+          updated_at: string;
+        };
+        Insert: {
+          created_at?: string;
+          created_by_user_id: string;
+          id?: string;
+          matched_driver_user_id?: string | null;
+          notes?: string | null;
+          pickup_label?: string | null;
+          pickup_latitude: number;
+          pickup_longitude: number;
+          requested_by_role: string;
+          status?: string;
+          updated_at?: string;
+        };
+        Update: {
+          created_at?: string;
+          created_by_user_id?: string;
+          id?: string;
+          matched_driver_user_id?: string | null;
+          notes?: string | null;
+          pickup_label?: string | null;
+          pickup_latitude?: number;
+          pickup_longitude?: number;
+          requested_by_role?: string;
+          status?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
