@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "npm run dev --workspace web",
     "build": "npm run build --workspaces",
-    "lint": "npm run lint --workspace web"
+    "lint": "npm run lint --workspace web",
+    "test": "npm run test --workspace web",
+    "coverage": "npm run coverage --workspace web"
   }
 }
