@@ -194,11 +194,16 @@ The current file mainly:
 
 This file defines the home page at `/`.
 
-It uses Material UI layout components to show:
+It uses Material UI layout components and `next/image` to show:
 
-- a shared heading
-- a short paragraph
-- the interactive `ClickCounter`
+- a left-aligned landing-page image in the hero area
+- an oversized statement about drunk driving
+- supporting product copy about *Designated*
+- a lower card with longer explanatory sections
+
+The image asset for that hero lives in:
+
+- `apps/web/public/images/pulled-over.jpg`
 
 ## `apps/web/app/components/page-header.tsx`
 
