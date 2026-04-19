@@ -53,6 +53,10 @@ In this app:
 - `TopNav` renders shared navigation
 - the current page component renders the page-specific content
 
+One important detail: the theme provider starts with a stable light-mode render
+first, then reads browser preferences after mount. That helps the server HTML
+match the first client render.
+
 ## What "Initial Render" Means
 
 The initial render is the first time React runs a component to figure out what
@@ -62,7 +66,7 @@ For the home page, the rough flow is:
 
 1. Next.js chooses `app/page.tsx` because the URL is `/`
 2. `app/layout.tsx` wraps that page
-3. `AppThemeProvider` decides whether the theme is light or dark
+3. `AppThemeProvider` starts in light mode for a stable first render
 4. `TopNav` renders
 5. the Home page renders its `Container`, `Paper`, `Stack`, `PageHeader`, and
    `ClickCounter`
@@ -124,6 +128,16 @@ When the user clicks the theme toggle in the top nav:
 3. it chooses the other MUI theme
 4. MUI components receive the new theme values
 5. the app updates from light to dark, or dark to light
+
+On the first page load, the provider also has a second kind of update:
+
+1. the app first renders in light mode
+2. after mount, the provider checks `localStorage`
+3. if no saved value exists, it checks the system color-scheme preference
+4. the app may re-render into dark mode after that browser-only check
+
+That two-step flow is what keeps hydration stable while still respecting the
+user’s preference.
 
 ```mermaid
 flowchart TD

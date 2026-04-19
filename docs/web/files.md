@@ -30,9 +30,11 @@ flowchart TD
     B --> S["sign-in/page.tsx"]
     B --> T["dashboard/page.tsx"]
     B --> U["admin/page.tsx"]
+    B --> UA["admin/users/page.tsx"]
     B --> V["auth/actions.ts"]
     B --> W["components/"]
     C --> X["supabase/"]
+    C --> XA["admin-access.ts"]
     D --> Y["add-admin.mjs"]
 ```
 
@@ -66,6 +68,7 @@ Important files here include:
 - `theme-provider.tsx`
 - `globals.css`
 - route files such as `page.tsx` and `about/page.tsx`
+- nested admin files such as `admin/users/page.tsx`
 - shared UI in `components/`
 
 ## `apps/web/app/components/`
@@ -78,6 +81,7 @@ Right now it contains:
 - `click-counter.tsx`
 - `top-nav.tsx`
 - `auth-message.tsx`
+- `dashboard-shell.tsx`
 
 Most of these components use Material UI building blocks such as `Typography`,
 `Stack`, `Button`, `Menu`, and `Alert`.
@@ -89,6 +93,7 @@ This folder holds helper code that is not itself a page or visual component.
 In this app, the most important part is:
 
 - `lib/supabase/`: helpers for browser, server, proxy, env, and admin access
+- `lib/admin-access.ts`: shared admin permission helpers
 
 ## `apps/web/scripts/`
 
@@ -161,12 +166,14 @@ It contains:
 
 - a light theme
 - a dark theme
+- a light grey page background for light mode
 - a React context for color mode
 - a toggle function
 - `CssBaseline` for MUI base styles
 
-It also stores the chosen mode in `localStorage`, so the user’s preference can
-survive a page refresh.
+It also starts from a stable light-mode render, then reads the saved or
+system-preferred mode after mount so the app can avoid hydration mismatches
+while still remembering the user’s preference.
 
 There is a dedicated guide for this file in
 [`docs/web/theme-provider.md`](./theme-provider.md).
@@ -233,7 +240,11 @@ It also uses:
 
 - `MenuIcon` for the navigation dropdown
 - `DarkModeIcon` and `LightModeIcon` for the theme toggle
+- `usePathname()` to detect dashboard-area routes
 - `useColorMode()` from the theme provider
+
+On `/dashboard` and `/admin`, it also shows a mobile-only menu icon to the left
+of the brand that opens the dashboard drawer.
 
 There is a dedicated guide for this file in
 [`docs/web/components/top-nav.md`](./components/top-nav.md).
@@ -248,6 +259,23 @@ when a message is present.
 There is a dedicated guide for this file in
 [`docs/web/components/auth-message.md`](./components/auth-message.md).
 
+## `apps/web/app/components/dashboard-shell.tsx`
+
+This is the shared shell for the app area.
+
+It is used by the dashboard-related pages so they can share:
+
+- a left navigation on larger screens
+- a temporary drawer on smaller screens
+- a main content panel
+- a theme-aware nav surface that works in both light and dark mode
+
+It also supports a nested admin subsection, so `Admin` can expand to show
+`Users`.
+
+There is a dedicated guide for this file in
+[`docs/web/components/dashboard-shell.md`](./components/dashboard-shell.md).
+
 ## `apps/web/app/auth/actions.ts`
 
 This file contains the server actions for auth work:
@@ -258,6 +286,39 @@ This file contains the server actions for auth work:
 
 There is a dedicated guide for this file in
 [`docs/web/supabase/auth-actions.md`](./supabase/auth-actions.md).
+
+## `apps/web/app/admin/users/page.tsx`
+
+This file defines the `/admin/users` page.
+
+It lists signed-up users and gives admins tools to promote, demote, or delete
+them.
+
+There is a dedicated guide for this file in
+[`docs/web/pages/admin-users-page.md`](./pages/admin-users-page.md).
+
+## `apps/web/app/admin/users/actions.ts`
+
+This file contains server actions for admin user management.
+
+It uses the Supabase Admin API for:
+
+- promote to admin
+- demote from admin
+- delete account
+
+There is a dedicated guide for this file in
+[`docs/web/supabase/admin-user-actions.md`](./supabase/admin-user-actions.md).
+
+## `apps/web/lib/admin-access.ts`
+
+This file holds shared helpers for admin-only checks.
+
+It decides whether a user counts as an admin and redirects away from admin
+pages when necessary.
+
+There is a dedicated guide for this file in
+[`docs/web/supabase/admin-access.md`](./supabase/admin-access.md).
 
 ## `apps/web/app/about/page.tsx`
 

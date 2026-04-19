@@ -26,6 +26,7 @@ flowchart TD
     A --> G["sign-in/page.tsx"]
     A --> H["dashboard/page.tsx"]
     A --> I["admin/page.tsx"]
+    A --> IA["admin/users/page.tsx"]
     A --> J["theme-provider.tsx"]
     A --> K["components/"]
     A --> L["auth/actions.ts"]
@@ -41,6 +42,7 @@ The current app defines these URLs:
 - `app/sign-in/page.tsx` -> `/sign-in`
 - `app/dashboard/page.tsx` -> `/dashboard`
 - `app/admin/page.tsx` -> `/admin`
+- `app/admin/users/page.tsx` -> `/admin/users`
 
 ## How Next.js Thinks About It
 
@@ -66,7 +68,7 @@ In this app:
 
 - `app/layout.tsx` wraps every route in the app
 - that includes `/`, `/about`, `/contact`, `/sign-up`, `/sign-in`,
-  `/dashboard`, and `/admin`
+  `/dashboard`, `/admin`, and `/admin/users`
 
 ## Files That Do Not Create Routes
 
@@ -76,8 +78,10 @@ Examples:
 
 - `theme-provider.tsx`: provides the MUI light/dark theme
 - `components/top-nav.tsx`: shared navigation component
+- `components/dashboard-shell.tsx`: shared app-area layout for dashboard pages
 - `components/click-counter.tsx`: reusable component
 - `auth/actions.ts`: server actions for sign in, sign up, and sign out
+- `admin/users/actions.ts`: server actions for admin user management
 - `globals.css`: global CSS file imported by the layout
 
 These files support routing, but they are not routes themselves.
@@ -89,12 +93,16 @@ apps/web/app/
 ├── about/
 │   └── page.tsx
 ├── admin/
-│   └── page.tsx
+│   ├── page.tsx
+│   └── users/
+│       ├── actions.ts
+│       └── page.tsx
 ├── auth/
 │   └── actions.ts
 ├── components/
 │   ├── auth-message.tsx
 │   ├── click-counter.tsx
+│   ├── dashboard-shell.tsx
 │   ├── page-header.tsx
 │   └── top-nav.tsx
 ├── contact/
@@ -118,3 +126,6 @@ create URLs.
 
 The `auth/` folder also does not create a URL by itself here, because it does
 not contain a `page.tsx` file. It contains server actions.
+
+The `admin/users/actions.ts` file also does not create a URL. It supports the
+`/admin/users` page, but it is not a page by itself.

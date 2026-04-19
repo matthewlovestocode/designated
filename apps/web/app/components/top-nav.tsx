@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -15,8 +16,11 @@ import Typography from "@mui/material/Typography";
 import { useColorMode } from "../theme-provider";
 
 export default function TopNav() {
+  const pathname = usePathname();
   const { mode, toggleColorMode } = useColorMode();
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
+  const showsDashboardDrawerTrigger =
+    pathname === "/dashboard" || pathname === "/admin";
 
   const openMenu = (event: React.MouseEvent<HTMLElement>) => {
     setMenuAnchor(event.currentTarget);
@@ -26,10 +30,37 @@ export default function TopNav() {
     setMenuAnchor(null);
   };
 
+  const openDashboardDrawer = () => {
+    window.dispatchEvent(new CustomEvent("dashboard-nav:open"));
+  };
+
   return (
     <AppBar position="static" color="transparent" elevation={0}>
-      <Toolbar sx={{ gap: 2, flexWrap: "wrap" }}>
-        <Typography variant="h6">Designated</Typography>
+      <Toolbar
+        sx={{
+          gap: 1,
+          minHeight: {
+            xs: 64,
+            sm: 72
+          },
+          px: {
+            xs: 2,
+            sm: 3
+          }
+        }}
+      >
+        {showsDashboardDrawerTrigger ? (
+          <IconButton
+            aria-label="Open app navigation"
+            onClick={openDashboardDrawer}
+            sx={{ display: { xs: "inline-flex", md: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
+        ) : null}
+        <Typography noWrap variant="h6">
+          Designated
+        </Typography>
         <Box sx={{ flexGrow: 1 }} />
         <IconButton
           aria-controls={menuAnchor ? "page-links-menu" : undefined}

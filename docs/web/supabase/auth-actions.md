@@ -70,6 +70,10 @@ This file contains the server actions for auth:
 - sign in
 - sign out
 
+If you are brand new to server actions themselves, read
+[Server Actions Guide](../server-actions.md) first, then come back to this file
+as the concrete example.
+
 ## `"use server";`
 
 This tells Next.js that the functions in this file run on the server.

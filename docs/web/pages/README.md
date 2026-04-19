@@ -15,4 +15,5 @@ Most of the current pages use Material UI layout components such as
 - [Sign In Page](./sign-in-page.md): explains `apps/web/app/sign-in/page.tsx`
 - [Dashboard Page](./dashboard-page.md): explains `apps/web/app/dashboard/page.tsx`
 - [Admin Page](./admin-page.md): explains `apps/web/app/admin/page.tsx`
+- [Admin Users Page](./admin-users-page.md): explains `apps/web/app/admin/users/page.tsx`
 - [Root Layout](./root-layout.md): explains `apps/web/app/layout.tsx`
