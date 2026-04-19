@@ -10,7 +10,8 @@ the guides explain both.
 
 - [Page Header](./page-header.md): explains `page-header.tsx`
 - [Click Counter](./click-counter.md): explains `click-counter.tsx`
-- [Death Clock](./death-clock.md): explains `death-clock.tsx`
+- [Death Clock](./death-clock.md): explains the earlier `death-clock.tsx`
+- [Linear Death Clock](./linear-death-clock.md): explains `linear-death-clock.tsx`
 - [Auth Message](./auth-message.md): explains `auth-message.tsx`
 - [Dashboard Shell](./dashboard-shell.md): explains `dashboard-shell.tsx`
 - [Top Navigation](./top-nav.md): explains `top-nav.tsx`

@@ -20,6 +20,7 @@ The page has two main parts:
 - the top section uses a responsive two-column grid
 - the image stacks above the text on smaller screens
 - the death clock now lives in its own dedicated section below the hero
+- the death-clock section now uses a full-width linear visualization
 - the longer explanation content lives in its own separate section below that
 
 ## Hero Layout Diagram
@@ -30,8 +31,8 @@ flowchart LR
     B --> C["Left: pulled-over image"]
     B --> D["Right: headline and intro"]
     A --> E["Death clock section"]
-    E --> F["Copy on left"]
-    E --> G["Clock on right"]
+    E --> F["Copy at top"]
+    E --> G["Full-width clock row"]
     A --> H["Explanatory content section"]
     H --> I["What Designated is for"]
     H --> J["Why drunk driving is stupid"]
@@ -50,7 +51,9 @@ The death-clock section contains:
 - the heading `People Die From Drunk Driving`
 - a short explanation of the official 42-minute statistic
 - a sharper line connecting that statistic to drunk driving
-- the large countdown on the right
+- a full-width `LinearDeathClock` row
+- a large countdown inside that row
+- a symbolic moving car and person marker
 
 The lower explanation section contains:
 
@@ -68,3 +71,6 @@ For a beginner, this file is a good example of how one page can combine:
 - responsive design
 
 all in one place.
+
+It is also a useful example of a server-rendered page using a live-updating
+client component.

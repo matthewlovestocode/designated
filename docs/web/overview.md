@@ -39,6 +39,7 @@ pieces:
 
 - a real landing page with image-led product messaging
 - a dedicated death-clock section on the landing page
+- a full-width linear death-clock visualization with a moving car and countdown
 - public pages such as Home, About, and Contact
 - auth pages for sign up and sign in
 - a protected dashboard page
