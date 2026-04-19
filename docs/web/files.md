@@ -100,6 +100,8 @@ Right now it contains:
 - `availability-map.tsx`
 - `nearby-drivers-card.tsx`
 - `nearby-drivers-map.tsx`
+- `opportunities-map.tsx`
+- `opportunities-map-scene.tsx`
 
 Most of these components use Material UI building blocks such as `Typography`,
 `Stack`, `Button`, `Menu`, and `Alert`.
@@ -131,6 +133,16 @@ Right now it contains:
 - `actions.ts`: create, cancel, and claim ride requests
 - `request-ride-card.tsx`: client component for creating a request
 - `ride-request-list.tsx`: shared list UI for patron, concierge, and driver views
+- `pickup-location-map.tsx`: concierge pickup-point map picker
+
+## `apps/web/supabase/migrations/`
+
+This folder holds database migrations for the web app.
+
+Right now it includes:
+
+- `create_driver_availability.sql`: driver radius and live availability storage
+- `create_ride_requests.sql`: persisted patron and concierge ride requests
 
 ## `apps/web/scripts/`
 

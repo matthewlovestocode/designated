@@ -14,4 +14,4 @@ It is a signed-in app page for staff who help patrons connect with drivers.
 - it redirects to `/sign-in` if there is no user
 - it renders inside `DashboardShell`
 - it introduces the concierge subsection in the left navigation
-
+- it points the user toward the persisted concierge request workflow

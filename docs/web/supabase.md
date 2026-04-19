@@ -65,6 +65,11 @@ If you want the generated TypeScript types to match the live schema, run:
 npm run db:types --workspace web
 ```
 
+The current product workflow depends on both tables:
+
+- `driver_availability` powers radius-based driver visibility
+- `ride_requests` powers persisted patron and concierge pickup requests
+
 ## Which Helper To Use
 
 Use the browser client in client components:

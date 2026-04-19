@@ -15,8 +15,15 @@ the guides explain both.
 - [Auth Message](./auth-message.md): explains `auth-message.tsx`
 - [Dashboard Shell](./dashboard-shell.md): explains `dashboard-shell.tsx`
 - [Top Navigation](./top-nav.md): explains `top-nav.tsx`
+- [Driver Availability Card](./driver-availability-card.md): explains
+  `driver-availability-card.tsx`
+- [Nearby Drivers Card](./nearby-drivers-card.md): explains
+  `nearby-drivers-card.tsx`
+- [Opportunities Map](./opportunities-map.md): explains `opportunities-map.tsx`
+- [Pickup Location Map](./pickup-location-map.md): explains
+  `pickup-location-map.tsx`
 
-Newer location-based components such as `driver-availability-card.tsx`,
-`availability-map.tsx`, `nearby-drivers-card.tsx`, and `nearby-drivers-map.tsx`
-are now part of the current app flow too, even though dedicated beginner guides
-have not been written for each of them yet.
+The map scene files such as `availability-map-scene.tsx`,
+`nearby-drivers-map-scene.tsx`, `opportunities-map-scene.tsx`, and
+`pickup-location-map-scene.tsx` are the browser-only rendering helpers behind
+those higher-level components.

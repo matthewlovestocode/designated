@@ -175,6 +175,7 @@ A server action runs on the server, so it can safely use:
 - secure cookies
 - secret database credentials
 - Supabase admin helpers
+- persisted ride-request actions such as create, claim, cancel, and complete
 
 That is why the admin-user-management actions belong on the server.
 

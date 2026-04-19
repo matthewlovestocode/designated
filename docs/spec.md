@@ -28,7 +28,7 @@ is consistent:
 - give patrons a path to create a real ride request
 - give concierges a path to create and manage ride requests for patrons
 - give drivers a way to mark themselves available, view persisted requests, and
-  claim opportunities
+  claim and complete opportunities
 - give admins a way to manage users and platform access
 
 ## Current Product Framing
@@ -92,9 +92,10 @@ workflow.
 The current first-level role pages imply these intended directions:
 
 - `patron` -> request a ride, look up nearby drivers, and view saved requests
-- `concierge` -> manage ride requests for patrons and check nearby drivers
+- `concierge` -> manage ride requests for patrons, check nearby drivers, and
+  choose pickup points on a map
 - `driver` -> share availability, browse persisted requests, and claim
-  opportunities
+  or complete opportunities
 - `admin` -> manage users and roles
 
 ## Early Workflow Intent
@@ -107,7 +108,8 @@ At a high level, the intended workflow is:
 3. the patron or concierge can create a persisted ride request
 4. a driver marks themselves available with location and radius
 5. a driver sees that request as an opportunity and can claim it
-6. the ride is coordinated before the patron attempts to drive
+6. the driver can later mark the ride completed
+7. the ride is coordinated before the patron attempts to drive
 
 An admin supports the system by managing access and oversight rather than
 participating in the ride flow directly.
@@ -140,6 +142,17 @@ has the start of a real request-and-response loop:
 - a rider-side role creates a request
 - the request is stored
 - a driver can discover and claim that request
+- the request can later move to a completed state
+
+## Current Map-Based Workflow
+
+The current app is also becoming map-first in key areas:
+
+- drivers see their own coverage radius on a map
+- patrons and concierges can view nearby available drivers on a map
+- concierge staff can choose a pickup point visually on a zoomed-in map
+- drivers can compare opportunities against their own location and radius on a
+  map
 
 ## Early Non-Goals
 
@@ -147,7 +160,7 @@ The current project does not yet define:
 
 - pricing or payment flows
 - driver dispatch algorithms
-- live location tracking
+- live turn-by-turn tracking
 - bar onboarding workflows
 - patron identity verification rules
 - driver screening rules

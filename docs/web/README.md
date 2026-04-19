@@ -74,3 +74,4 @@ That order helps you see:
 - how server-side Supabase access works
 - how driver availability is saved
 - how persisted ride requests are created and claimed
+- how the newer map-based components fit into those flows

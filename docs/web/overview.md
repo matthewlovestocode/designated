@@ -49,6 +49,7 @@ pieces:
 - persisted ride requests for patrons and concierges
 - driver opportunities backed by saved ride requests
 - map-based UI for driver coverage and rider-side nearby-driver lookup
+- map-based pickup selection for concierge-created requests
 - an admin-only page
 - a shared top navigation
 - a light and dark theme toggle
@@ -97,6 +98,7 @@ That path shows:
 - how server-side auth checks work
 - how persisted availability is stored
 - how ride requests move through the app
+- how maps now support all three active role workflows
 
 ## Visual Learning Map
 

@@ -16,3 +16,4 @@ It is the first drill-down page inside the concierge section.
 - it lets the concierge check nearby available drivers at the pickup location
 - it lets the concierge create a persisted ride request
 - it lists the concierge's saved ride requests
+- it allows the concierge to choose a pickup point on a zoomed-in map

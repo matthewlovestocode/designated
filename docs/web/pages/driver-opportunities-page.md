@@ -14,5 +14,7 @@ It is the first drill-down page inside the driver section.
 - it redirects to `/sign-in` if there is no user
 - it renders inside `DashboardShell`
 - it loads persisted ride requests from Supabase
-- it shows open and matched requests
+- it separates open requests from requests already claimed by the current driver
+- it renders `OpportunitiesMap`
 - it lets a signed-in driver claim an open request
+- it lets a signed-in driver mark a matched request completed

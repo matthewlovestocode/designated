@@ -37,10 +37,11 @@ flowchart TD
     A --> M["api/health/route.ts"]
     A --> N["availability/actions.ts"]
     A --> O["ride-requests/actions.ts"]
-    A --> P["theme-provider.tsx"]
-    A --> Q["components/"]
-    A --> R["auth/actions.ts"]
-    B --> S["Wraps every route"]
+    A --> P["ride-requests/request-ride-card.tsx"]
+    A --> Q["theme-provider.tsx"]
+    A --> R["components/"]
+    A --> S["auth/actions.ts"]
+    B --> T["Wraps every route"]
 ```
 
 The current app defines these URLs:
@@ -98,6 +99,7 @@ Examples:
 - `theme-provider.tsx`: provides the MUI light/dark theme
 - `availability/actions.ts`: server actions for nearby-driver lookup
 - `ride-requests/actions.ts`: server actions for persisted ride requests
+- `ride-requests/request-ride-card.tsx`: persisted request creation UI
 - `components/top-nav.tsx`: shared navigation component
 - `components/dashboard-shell.tsx`: shared app-area layout for dashboard pages
 - `components/click-counter.tsx`: reusable component
@@ -159,6 +161,7 @@ apps/web/app/
 │   └── page.tsx
 ├── ride-requests/
 │   ├── actions.ts
+│   ├── pickup-location-map.tsx
 │   ├── request-ride-card.tsx
 │   └── ride-request-list.tsx
 ├── globals.css

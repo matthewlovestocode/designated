@@ -22,7 +22,9 @@ The current app direction focuses on:
 
 - communicating the real human cost of drunk driving
 - letting patrons and concierges create persisted ride requests
-- letting drivers share availability and view claimable opportunities
+- letting patrons and concierges use location-aware maps while requesting help
+- letting drivers share availability, view mapped opportunities, claim requests,
+  and complete claimed rides
 - giving admins a path to manage users and roles
 
 For a fuller product-direction document, see [docs/spec.md](./docs/spec.md).
@@ -59,6 +61,17 @@ npm run dev
 
 Then open [http://localhost:3000](http://localhost:3000).
 
+## Current Workflow
+
+The current app already supports an early end-to-end safety workflow:
+
+1. a `driver` can mark themselves available with a live location and radius
+2. a `patron` can check for nearby drivers and create a persisted ride request
+3. a `concierge` can do the same, including choosing a pickup point on a
+   zoomed-in map
+4. a `driver` can review mapped opportunities, claim an open request, and mark
+   it completed
+
 ## Environment Files
 
 The web app keeps its environment example file here:
@@ -88,6 +101,12 @@ From the repository root:
 - `npm run lint` runs linting for the `web` workspace.
 - `npm test` runs the Vitest suite for the `web` workspace.
 - `npm run coverage` runs the Vitest suite with coverage reporting.
+
+From the `web` workspace:
+
+- `npm run db:types --workspace web` regenerates Supabase TypeScript types
+- `npm run make-admin --workspace web -- user@example.com` grants the `admin`
+  role to an existing Supabase user
 
 ## Testing
 
