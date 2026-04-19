@@ -200,8 +200,9 @@ It uses Material UI layout components and `next/image` to show:
 - a left-aligned landing-page image in the hero area
 - an oversized statement about drunk driving
 - supporting product copy about *Designated*
-- a small statistical death clock
-- a lower card with longer explanatory sections
+- a dedicated death-clock section with copy on the left and the timer on the
+  right
+- a lower section with longer explanatory content
 
 The image asset for that hero lives in:
 
@@ -237,7 +238,8 @@ This is a client-side landing-page component that shows a rotating countdown
 based on the statistic of about one alcohol-impaired-driving death every 42
 minutes.
 
-It is intentionally labeled as a statistical clock, not a literal prediction.
+It is intentionally focused on the countdown itself, with most of the
+explanatory copy living in the page section around it.
 
 There is a dedicated guide for this file in
 [`docs/web/components/death-clock.md`](./components/death-clock.md).

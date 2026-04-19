@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
@@ -38,41 +36,49 @@ export default function DeathClock() {
   }, []);
 
   return (
-    <Paper
-      sx={(theme) => ({
-        bgcolor: theme.palette.mode === "dark" ? "grey.900" : "grey.100",
-        borderRadius: 3,
-        maxWidth: 360,
-        px: 2.5,
-        py: 2
-      })}
-      variant="outlined"
+    <Stack
+      spacing={1}
+      sx={{
+        alignItems: {
+          xs: "flex-start",
+          md: "flex-end"
+        },
+        width: "fit-content"
+      }}
     >
-      <Stack spacing={1}>
-        <Typography sx={{ fontWeight: 700 }} variant="overline">
-          Statistical death clock
-        </Typography>
-        <Typography sx={{ fontWeight: 800, letterSpacing: "-0.04em" }} variant="h3">
-          {formatRemaining(remainingMs)}
-        </Typography>
-        <Typography color="text.secondary" variant="body2">
-          Based on NHTSA&apos;s 2023 figure of about one death every 42 minutes in
-          alcohol-impaired-driving crashes.
-        </Typography>
-        <Box
-          sx={(theme) => ({
-            bgcolor: theme.palette.mode === "dark" ? "grey.800" : "grey.200",
-            borderRadius: 2,
-            px: 1.5,
-            py: 1
-          })}
-        >
-          <Typography color="text.secondary" variant="caption">
-            This is a persistent statistical countdown, not a literal prediction
-            of the next crash.
-          </Typography>
-        </Box>
-      </Stack>
-    </Paper>
+      <Typography
+        sx={{
+          fontSize: {
+            xs: "3.75rem",
+            sm: "5rem",
+            md: "5.75rem"
+          },
+          fontVariantNumeric: "tabular-nums",
+          fontWeight: 800,
+          letterSpacing: "-0.08em",
+          lineHeight: 0.88,
+          textAlign: {
+            xs: "left",
+            md: "right"
+          },
+          whiteSpace: "nowrap"
+        }}
+      >
+        {formatRemaining(remainingMs)}
+      </Typography>
+      <Typography
+        color="text.secondary"
+        sx={{
+          maxWidth: 220,
+          textAlign: {
+            xs: "left",
+            md: "right"
+          }
+        }}
+        variant="body2"
+      >
+        Until the next statistically expected alcohol-impaired-driving death.
+      </Typography>
+    </Stack>
   );
 }

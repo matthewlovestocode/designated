@@ -38,7 +38,7 @@ The project is still early, but the current app already has a few important
 pieces:
 
 - a real landing page with image-led product messaging
-- a small statistical death clock on the landing page
+- a dedicated death-clock section on the landing page
 - public pages such as Home, About, and Contact
 - auth pages for sign up and sign in
 - a protected dashboard page

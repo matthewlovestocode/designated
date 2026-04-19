@@ -12,15 +12,15 @@ The page has two main parts:
 
 - an above-the-fold hero area with an image on the left and headline/copy on
   the right
-- a lower content card with longer explanation sections
+- a set of full-width content cards below the hero
 
 ## Key Ideas
 
 - `next/image` is used for the landing-page image
 - the top section uses a responsive two-column grid
 - the image stacks above the text on smaller screens
-- the hero also includes a small statistical death clock component
-- the `Paper` below the hero holds the longer explanation content
+- the death clock now lives in its own dedicated section below the hero
+- the longer explanation content lives in its own separate section below that
 
 ## Hero Layout Diagram
 
@@ -28,10 +28,13 @@ The page has two main parts:
 flowchart LR
     A["Home page"] --> B["Hero grid"]
     B --> C["Left: pulled-over image"]
-    B --> D["Right: headline, intro, and death clock"]
-    A --> E["Paper content block"]
-    E --> F["What Designated is for"]
-    E --> G["Why drunk driving is stupid"]
+    B --> D["Right: headline and intro"]
+    A --> E["Death clock section"]
+    E --> F["Copy on left"]
+    E --> G["Clock on right"]
+    A --> H["Explanatory content section"]
+    H --> I["What Designated is for"]
+    H --> J["Why drunk driving is stupid"]
 ```
 
 ## Current Structure
@@ -41,9 +44,15 @@ The hero area contains:
 - the `pulled-over.jpg` image
 - the oversized statement `Drunk driving is stupid.`
 - the supporting paragraph that introduces *Designated*
-- the small statistical death clock
 
-The lower content card contains:
+The death-clock section contains:
+
+- the heading `People Die From Drunk Driving`
+- a short explanation of the official 42-minute statistic
+- a sharper line connecting that statistic to drunk driving
+- the large countdown on the right
+
+The lower explanation section contains:
 
 - a section explaining what Designated is for
 - a section explaining why drunk driving is stupid

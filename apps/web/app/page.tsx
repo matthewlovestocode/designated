@@ -68,9 +68,61 @@ export default function Home() {
               helps people get home safely by connecting bars, patrons,
               concierges, and designated drivers in one place.
             </Typography>
-            <DeathClock />
           </Stack>
         </Box>
+        <Paper sx={{ p: 4 }}>
+          <Box
+            sx={{
+              alignItems: {
+                xs: "flex-start",
+                md: "center"
+              },
+              display: "grid",
+              gap: 4,
+              gridTemplateColumns: {
+                xs: "1fr",
+                md: "minmax(0, 1fr) auto"
+              }
+            }}
+          >
+            <Stack spacing={2}>
+              <Typography variant="h5">People Die From Drunk Driving</Typography>
+              <Typography color="text.secondary">
+                According to NHTSA&apos;s 2023 national figure, about one person dies
+                every 42 minutes in an alcohol-impaired-driving crash.
+              </Typography>
+              <Typography>
+                This is what drunk driving does. It kills people so often that
+                you can put a clock to it.
+              </Typography>
+            </Stack>
+            <Box
+              sx={{
+                bgcolor: "background.default",
+                border: "1px solid",
+                borderColor: "divider",
+                borderRadius: 3,
+                justifySelf: {
+                  md: "end"
+                },
+                px: {
+                  xs: 2.5,
+                  sm: 3
+                },
+                py: {
+                  xs: 2.5,
+                  sm: 3
+                },
+                width: {
+                  xs: "100%",
+                  md: "auto"
+                }
+              }}
+            >
+              <DeathClock />
+            </Box>
+          </Box>
+        </Paper>
         <Paper sx={{ p: 4 }}>
           <Stack spacing={4}>
             <Stack spacing={2}>
