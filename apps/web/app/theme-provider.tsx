@@ -2,6 +2,7 @@
 
 import {
   createContext,
+  useEffect,
   useContext,
   useState,
   type ReactNode
@@ -83,21 +84,28 @@ export default function AppThemeProvider({
 }: {
   children: ReactNode;
 }) {
-  const [mode, setMode] = useState<PaletteMode>(() => {
-    if (typeof window === "undefined") {
-      return "light";
-    }
+  const [mode, setMode] = useState<PaletteMode>("light");
 
-    const storedMode = window.localStorage.getItem("color-mode");
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const storedMode = window.localStorage.getItem("color-mode");
 
-    if (storedMode === "light" || storedMode === "dark") {
-      return storedMode;
-    }
+      if (storedMode === "light" || storedMode === "dark") {
+        setMode(storedMode);
+        return;
+      }
 
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  });
+      setMode(
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light"
+      );
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   const toggleColorMode = () => {
     setMode((currentMode) => {
