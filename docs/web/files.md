@@ -40,8 +40,11 @@ flowchart TD
     B --> UB["api/health/route.ts"]
     B --> V["auth/actions.ts"]
     B --> W["components/"]
+    B --> WA["availability/"]
+    B --> WB["ride-requests/"]
     C --> X["supabase/"]
     C --> XA["admin-access.ts"]
+    C --> XB["driver-availability.ts"]
     D --> Y["add-admin.mjs"]
 ```
 
@@ -93,6 +96,10 @@ Right now it contains:
 - `top-nav.tsx`
 - `auth-message.tsx`
 - `dashboard-shell.tsx`
+- `driver-availability-card.tsx`
+- `availability-map.tsx`
+- `nearby-drivers-card.tsx`
+- `nearby-drivers-map.tsx`
 
 Most of these components use Material UI building blocks such as `Typography`,
 `Stack`, `Button`, `Menu`, and `Alert`.
@@ -105,6 +112,25 @@ In this app, the most important part is:
 
 - `lib/supabase/`: helpers for browser, server, proxy, env, and admin access
 - `lib/admin-access.ts`: shared admin permission helpers
+- `lib/driver-availability.ts`: shared distance and nearby-driver lookup logic
+
+## `apps/web/app/availability/`
+
+This folder holds server actions for rider-side nearby-driver lookups.
+
+Right now it contains:
+
+- `actions.ts`: looks up nearby drivers for the current signed-in user
+
+## `apps/web/app/ride-requests/`
+
+This folder holds the persisted ride-request workflow.
+
+Right now it contains:
+
+- `actions.ts`: create, cancel, and claim ride requests
+- `request-ride-card.tsx`: client component for creating a request
+- `ride-request-list.tsx`: shared list UI for patron, concierge, and driver views
 
 ## `apps/web/scripts/`
 
@@ -149,6 +175,7 @@ Important scripts:
 - `test`: run the Vitest suite once
 - `test:watch`: run Vitest in watch mode
 - `coverage`: run Vitest with coverage enabled
+- `db:types`: regenerate Supabase TypeScript types
 - `make-admin`: run the admin-grant script
 
 Important dependencies:
@@ -156,6 +183,7 @@ Important dependencies:
 - `next`, `react`, `react-dom`
 - `@mui/material`, `@mui/icons-material`, `@mui/material-nextjs`
 - `@supabase/supabase-js`, `@supabase/ssr`
+- `leaflet`, `react-leaflet`
 - `vitest`, `@testing-library/react`, `jsdom`
 
 ## `apps/web/vitest.config.ts`

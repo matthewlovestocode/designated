@@ -25,9 +25,10 @@ The product direction is still early and loosely defined, but the central idea
 is consistent:
 
 - make the cost of drunk driving feel immediate and visible
-- give patrons a path to request help
-- give concierges a path to manage or submit ride requests
-- give drivers a path to view opportunities
+- give patrons a path to create a real ride request
+- give concierges a path to create and manage ride requests for patrons
+- give drivers a way to mark themselves available, view persisted requests, and
+  claim opportunities
 - give admins a way to manage users and platform access
 
 ## Current Product Framing
@@ -90,9 +91,10 @@ workflow.
 
 The current first-level role pages imply these intended directions:
 
-- `patron` -> request a ride
-- `concierge` -> manage ride requests for patrons
-- `driver` -> browse opportunities where a ride is needed
+- `patron` -> request a ride, look up nearby drivers, and view saved requests
+- `concierge` -> manage ride requests for patrons and check nearby drivers
+- `driver` -> share availability, browse persisted requests, and claim
+  opportunities
 - `admin` -> manage users and roles
 
 ## Early Workflow Intent
@@ -100,9 +102,12 @@ The current first-level role pages imply these intended directions:
 At a high level, the intended workflow is:
 
 1. a patron needs a safe way home
-2. a concierge or the patron signals that a ride is needed
-3. a driver sees that opportunity
-4. the ride is coordinated before the patron attempts to drive
+2. a concierge or the patron can check whether any nearby drivers already cover
+   that location
+3. the patron or concierge can create a persisted ride request
+4. a driver marks themselves available with location and radius
+5. a driver sees that request as an opportunity and can claim it
+6. the ride is coordinated before the patron attempts to drive
 
 An admin supports the system by managing access and oversight rather than
 participating in the ride flow directly.
@@ -120,6 +125,21 @@ That includes the ability to:
 
 This means the `admin` role is no longer just conceptual in the spec. It now
 has real product responsibilities in the application.
+
+## Current Persisted Workflow
+
+The app now has two real persisted workflow pieces in Supabase:
+
+- `driver_availability`: stores a driver's current location, radius, and active
+  availability window
+- `ride_requests`: stores requests created by patrons or concierges
+
+That means the app is no longer only showing placeholder role sections. It now
+has the start of a real request-and-response loop:
+
+- a rider-side role creates a request
+- the request is stored
+- a driver can discover and claim that request
 
 ## Early Non-Goals
 

@@ -13,5 +13,6 @@ It is the first drill-down page inside the driver section.
 - it checks for a signed-in user on the server
 - it redirects to `/sign-in` if there is no user
 - it renders inside `DashboardShell`
-- it acts as the starter page for future driver opportunity listings
-
+- it loads persisted ride requests from Supabase
+- it shows open and matched requests
+- it lets a signed-in driver claim an open request

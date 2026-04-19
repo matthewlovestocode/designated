@@ -21,8 +21,8 @@ At a high level, Designated is being shaped around four roles:
 The current app direction focuses on:
 
 - communicating the real human cost of drunk driving
-- giving patrons and concierges a path to request help
-- giving drivers a path to view opportunities
+- letting patrons and concierges create persisted ride requests
+- letting drivers share availability and view claimable opportunities
 - giving admins a path to manage users and roles
 
 For a fuller product-direction document, see [docs/spec.md](./docs/spec.md).
@@ -70,6 +70,14 @@ If you are setting up Supabase locally, create:
 - `apps/web/.env.local`
 
 and copy the variable names from the example file.
+
+If you add new Supabase tables or policies, push the migrations before using the
+new feature in the app:
+
+```bash
+cd apps/web
+supabase db push --include-all
+```
 
 ## Scripts
 

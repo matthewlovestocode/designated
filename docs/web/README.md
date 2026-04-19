@@ -35,7 +35,7 @@ If you are brand new to this repository, this is the simplest picture:
 2. `apps/web` is the Next.js app.
 3. `app/` holds the pages, layout, theme provider, and shared UI.
 4. Material UI supplies the visual components and theming system.
-5. Supabase supplies auth and server-side user checks.
+5. Supabase supplies auth, persisted availability, and persisted ride requests.
 
 ```mermaid
 flowchart TD
@@ -60,7 +60,8 @@ If you want to learn the app step by step, this is a good path:
 5. `apps/web/app/page.tsx`
 6. `apps/web/app/components/click-counter.tsx`
 7. `apps/web/lib/supabase/server.ts`
-8. `apps/web/app/auth/actions.ts`
+8. `apps/web/app/driver/actions.ts`
+9. `apps/web/app/ride-requests/actions.ts`
 
 That order helps you see:
 
@@ -71,4 +72,5 @@ That order helps you see:
 - how a page renders UI
 - how client-side state works
 - how server-side Supabase access works
-- how forms connect to auth actions
+- how driver availability is saved
+- how persisted ride requests are created and claimed

@@ -45,6 +45,10 @@ pieces:
 - auth pages for sign up and sign in
 - a protected dashboard page
 - signed-in role sections for patrons, concierges, and drivers
+- driver availability with location and radius
+- persisted ride requests for patrons and concierges
+- driver opportunities backed by saved ride requests
+- map-based UI for driver coverage and rider-side nearby-driver lookup
 - an admin-only page
 - a shared top navigation
 - a light and dark theme toggle
@@ -65,6 +69,7 @@ From the `web` workspace:
 
 - `npm run make-admin --workspace web -- user@example.com`: grants the admin
   role to an existing Supabase user
+- `npm run db:types --workspace web`: regenerates the Supabase TypeScript types
 
 ## A Good Beginner Path
 
@@ -78,7 +83,8 @@ If you want to learn this project step by step, this is a useful path:
 6. `apps/web/app/components/page-header.tsx`
 7. `apps/web/app/components/click-counter.tsx`
 8. `apps/web/lib/supabase/server.ts`
-9. `apps/web/app/auth/actions.ts`
+9. `apps/web/app/driver/actions.ts`
+10. `apps/web/app/ride-requests/actions.ts`
 
 That path shows:
 
@@ -89,7 +95,8 @@ That path shows:
 - how a page is built from smaller components
 - how client-side state works
 - how server-side auth checks work
-- how the project is tested
+- how persisted availability is stored
+- how ride requests move through the app
 
 ## Visual Learning Map
 
@@ -101,7 +108,8 @@ flowchart LR
     G["top-nav.tsx"] --> H["Shared navigation and toggle"]
     I["page.tsx"] --> J["Homepage UI"]
     K["click-counter.tsx"] --> L["State and re-rendering"]
-    M["auth/actions.ts"] --> N["Supabase auth flow"]
+    M["driver/actions.ts"] --> N["Driver availability flow"]
+    O["ride-requests/actions.ts"] --> P["Persisted ride request flow"]
 ```
 
 ## Source Files And Generated Files

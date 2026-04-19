@@ -23,3 +23,12 @@ Most of the current pages use Material UI layout components such as
 - [Admin Page](./admin-page.md): explains `apps/web/app/admin/page.tsx`
 - [Admin Users Page](./admin-users-page.md): explains `apps/web/app/admin/users/page.tsx`
 - [Root Layout](./root-layout.md): explains `apps/web/app/layout.tsx`
+
+The most active role workflow right now is:
+
+1. `Patron Request Page` or `Concierge Requests Page`
+2. `Driver Page`
+3. `Driver Opportunities Page`
+
+That path shows how ride requests are created, how driver availability is
+shared, and how a driver can claim an opportunity.

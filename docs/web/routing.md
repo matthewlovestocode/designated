@@ -35,10 +35,12 @@ flowchart TD
     A --> L["admin/page.tsx"]
     A --> LA["admin/users/page.tsx"]
     A --> M["api/health/route.ts"]
-    A --> N["theme-provider.tsx"]
-    A --> O["components/"]
-    A --> P["auth/actions.ts"]
-    B --> Q["Wraps every route"]
+    A --> N["availability/actions.ts"]
+    A --> O["ride-requests/actions.ts"]
+    A --> P["theme-provider.tsx"]
+    A --> Q["components/"]
+    A --> R["auth/actions.ts"]
+    B --> S["Wraps every route"]
 ```
 
 The current app defines these URLs:
@@ -94,6 +96,8 @@ Some files inside `app/` are important but do not map to URLs.
 Examples:
 
 - `theme-provider.tsx`: provides the MUI light/dark theme
+- `availability/actions.ts`: server actions for nearby-driver lookup
+- `ride-requests/actions.ts`: server actions for persisted ride requests
 - `components/top-nav.tsx`: shared navigation component
 - `components/dashboard-shell.tsx`: shared app-area layout for dashboard pages
 - `components/click-counter.tsx`: reusable component
@@ -130,6 +134,8 @@ apps/web/app/
 ├── api/
 │   └── health/
 │       └── route.ts
+├── availability/
+│   └── actions.ts
 ├── auth/
 │   └── actions.ts
 ├── concierge/
@@ -151,6 +157,10 @@ apps/web/app/
 │   ├── opportunities/
 │   │   └── page.tsx
 │   └── page.tsx
+├── ride-requests/
+│   ├── actions.ts
+│   ├── request-ride-card.tsx
+│   └── ride-request-list.tsx
 ├── globals.css
 ├── layout.tsx
 ├── page.tsx

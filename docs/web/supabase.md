@@ -8,6 +8,8 @@ The setup follows the official Supabase SSR guidance for Next.js:
 - server client helper
 - request proxy for auth cookie refresh
 - environment variables for the project URL and publishable key
+- workspace migrations for persisted availability and ride requests
+- generated TypeScript types for the public schema
 
 ## Files Added
 
@@ -36,6 +38,32 @@ You need:
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 - `SUPABASE_SECRET_KEY`
+- `SUPABASE_PROJECT_ID`
+
+## Current Database Work
+
+The app now expects at least these persisted Supabase tables:
+
+- `driver_availability`
+- `ride_requests`
+
+The migration files live in:
+
+- `apps/web/supabase/migrations/`
+
+After pulling new database changes, push the migrations before using the new
+feature in the app:
+
+```bash
+cd apps/web
+supabase db push --include-all
+```
+
+If you want the generated TypeScript types to match the live schema, run:
+
+```bash
+npm run db:types --workspace web
+```
 
 ## Which Helper To Use
 

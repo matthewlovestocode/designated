@@ -15,3 +15,8 @@ the guides explain both.
 - [Auth Message](./auth-message.md): explains `auth-message.tsx`
 - [Dashboard Shell](./dashboard-shell.md): explains `dashboard-shell.tsx`
 - [Top Navigation](./top-nav.md): explains `top-nav.tsx`
+
+Newer location-based components such as `driver-availability-card.tsx`,
+`availability-map.tsx`, `nearby-drivers-card.tsx`, and `nearby-drivers-map.tsx`
+are now part of the current app flow too, even though dedicated beginner guides
+have not been written for each of them yet.
