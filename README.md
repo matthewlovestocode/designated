@@ -1,9 +1,31 @@
 # Designated
 
-Designated is intended to be an app for designated drivers to discover bars and
-see whether those bars currently have patrons seeking a designated driver.
+Designated is a safety-focused web application intended to help people avoid
+drunk driving by making it easier to connect patrons, establishments, and
+designated drivers before someone gets behind the wheel impaired.
+
+The product is still early, but the current direction is centered on a simple
+idea: make the safer choice easier in the moment it matters.
 
 This repository is an `npm` monorepo with a Next.js app inside `apps/web`.
+
+## Product Direction
+
+At a high level, Designated is being shaped around four roles:
+
+- `patron`: a person who needs a safe ride home
+- `concierge`: establishment staff helping coordinate that ride
+- `driver`: a designated driver looking for opportunities to help
+- `admin`: an internal administrator managing access and oversight
+
+The current app direction focuses on:
+
+- communicating the real human cost of drunk driving
+- giving patrons and concierges a path to request help
+- giving drivers a path to view opportunities
+- giving admins a path to manage users and roles
+
+For a fuller product-direction document, see [docs/spec.md](./docs/spec.md).
 
 ## Structure
 
@@ -59,10 +81,22 @@ From the repository root:
 - `npm test` runs the Vitest suite for the `web` workspace.
 - `npm run coverage` runs the Vitest suite with coverage reporting.
 
+## Testing
+
+The web app uses:
+
+- `Vitest` for tests
+- `Testing Library` for React component testing
+- enforced coverage thresholds of `80%` across statements, branches,
+  functions, and lines
+
+If you want the beginner-friendly testing walkthrough, see
+[docs/web/testing.md](./docs/web/testing.md).
+
 ## Workspace Notes
 
 - Add more applications under `apps/`.
 - Add shared libraries or utilities under `packages/`.
 - The Next.js app uses the App Router.
 - Beginner-friendly documentation lives in `docs/`.
-- A lightweight product spec lives in `docs/spec.md`.
+- The evolving product direction lives in `docs/spec.md`.
