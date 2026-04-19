@@ -5,6 +5,7 @@ import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import DeathClock from "./components/death-clock";
 
 export default function Home() {
   return (
@@ -67,6 +68,7 @@ export default function Home() {
               helps people get home safely by connecting bars, patrons,
               concierges, and designated drivers in one place.
             </Typography>
+            <DeathClock />
           </Stack>
         </Box>
         <Paper sx={{ p: 4 }}>

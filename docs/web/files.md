@@ -79,6 +79,7 @@ Right now it contains:
 
 - `page-header.tsx`
 - `click-counter.tsx`
+- `death-clock.tsx`
 - `top-nav.tsx`
 - `auth-message.tsx`
 - `dashboard-shell.tsx`
@@ -199,6 +200,7 @@ It uses Material UI layout components and `next/image` to show:
 - a left-aligned landing-page image in the hero area
 - an oversized statement about drunk driving
 - supporting product copy about *Designated*
+- a small statistical death clock
 - a lower card with longer explanatory sections
 
 The image asset for that hero lives in:
@@ -228,6 +230,17 @@ It uses:
 
 There is a dedicated guide for this file in
 [`docs/web/components/click-counter.md`](./components/click-counter.md).
+
+## `apps/web/app/components/death-clock.tsx`
+
+This is a client-side landing-page component that shows a rotating countdown
+based on the statistic of about one alcohol-impaired-driving death every 42
+minutes.
+
+It is intentionally labeled as a statistical clock, not a literal prediction.
+
+There is a dedicated guide for this file in
+[`docs/web/components/death-clock.md`](./components/death-clock.md).
 
 ## `apps/web/app/components/top-nav.tsx`
 

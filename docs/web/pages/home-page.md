@@ -19,6 +19,7 @@ The page has two main parts:
 - `next/image` is used for the landing-page image
 - the top section uses a responsive two-column grid
 - the image stacks above the text on smaller screens
+- the hero also includes a small statistical death clock component
 - the `Paper` below the hero holds the longer explanation content
 
 ## Hero Layout Diagram
@@ -27,7 +28,7 @@ The page has two main parts:
 flowchart LR
     A["Home page"] --> B["Hero grid"]
     B --> C["Left: pulled-over image"]
-    B --> D["Right: headline and intro"]
+    B --> D["Right: headline, intro, and death clock"]
     A --> E["Paper content block"]
     E --> F["What Designated is for"]
     E --> G["Why drunk driving is stupid"]
@@ -40,6 +41,7 @@ The hero area contains:
 - the `pulled-over.jpg` image
 - the oversized statement `Drunk driving is stupid.`
 - the supporting paragraph that introduces *Designated*
+- the small statistical death clock
 
 The lower content card contains:
 
