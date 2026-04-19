@@ -80,7 +80,7 @@ Right now it contains:
 - `page-header.tsx`
 - `click-counter.tsx`
 - `death-clock.tsx`
-- `linear-death-clock.tsx`
+- `linear-stat-clock.tsx`
 - `top-nav.tsx`
 - `auth-message.tsx`
 - `dashboard-shell.tsx`
@@ -201,9 +201,9 @@ It uses Material UI layout components and `next/image` to show:
 - a left-aligned landing-page image in the hero area
 - an oversized statement about drunk driving
 - supporting product copy about *Designated*
-- a dedicated death-clock section with introductory copy followed by a
-  full-width linear clock row
-- a lower section with longer explanatory content
+- a dedicated death section with introductory copy followed by a full-width
+  stat row
+- a second arrests section with the same layout style
 
 The image asset for that hero lives in:
 
@@ -245,22 +245,28 @@ explanatory copy living in the page section around it.
 There is a dedicated guide for this file in
 [`docs/web/components/death-clock.md`](./components/death-clock.md).
 
-## `apps/web/app/components/linear-death-clock.tsx`
+## `apps/web/app/components/linear-stat-clock.tsx`
 
-This is the full-width death-clock component now used on the homepage.
+This is the reusable full-width statistic component now used on the homepage.
 
 It combines:
 
 - a large countdown
 - a moving car icon
 - a wide horizontal track
-- a person marker on the far right
+- an endpoint marker on the far right
 
 It is a client component because the timer and the car position update every
 second in the browser.
 
+The endpoint can change depending on the props. Right now the homepage uses it
+for:
+
+- deaths, with a person marker
+- arrests, with a police marker
+
 There is a dedicated guide for this file in
-[`docs/web/components/linear-death-clock.md`](./components/linear-death-clock.md).
+[`docs/web/components/linear-stat-clock.md`](./components/linear-stat-clock.md).
 
 ## `apps/web/app/components/top-nav.tsx`
 

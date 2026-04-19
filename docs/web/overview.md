@@ -38,8 +38,9 @@ The project is still early, but the current app already has a few important
 pieces:
 
 - a real landing page with image-led product messaging
-- a dedicated death-clock section on the landing page
-- a full-width linear death-clock visualization with a moving car and countdown
+- a dedicated death statistic section on the landing page
+- a matching arrests statistic section on the landing page
+- a reusable full-width linear stat visualization with a moving car and countdown
 - public pages such as Home, About, and Contact
 - auth pages for sign up and sign in
 - a protected dashboard page

@@ -4,7 +4,7 @@ This guide explains `apps/web/app/components/death-clock.tsx`.
 
 This is the earlier, smaller countdown-only version of the death clock.
 
-The homepage now uses `linear-death-clock.tsx` for the full-width visual
+The homepage now uses `linear-stat-clock.tsx` for the full-width visual
 version.
 
 ## What This Component Does
@@ -51,10 +51,10 @@ It only renders:
 The surrounding explanatory copy lives in `app/page.tsx`, not inside the
 component. That keeps the clock focused on being the visual stat object.
 
-If you want the newer visual version with the moving car and full-width track,
-read:
+If you want the newer reusable version with the moving car and full-width
+track, read:
 
-- [Linear Death Clock](./linear-death-clock.md)
+- [Linear Stat Clock](./linear-stat-clock.md)
 
 ## Clock Flow Diagram
 

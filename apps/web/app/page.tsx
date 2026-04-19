@@ -4,7 +4,10 @@ import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import LinearDeathClock from "./components/linear-death-clock";
+import LinearStatClock from "./components/linear-stat-clock";
+
+const DEATH_INTERVAL_MS = 42 * 60 * 1000;
+const DUI_ARREST_INTERVAL_MS = Math.round((365 * 24 * 60 * 60 * 1000) / 804_926);
 
 export default function Home() {
   return (
@@ -99,7 +102,57 @@ export default function Home() {
                 you can put a clock to it.
               </Typography>
             </Stack>
-            <LinearDeathClock />
+            <LinearStatClock
+              description="The car moves steadily across the same span of time that separates one alcohol-impaired-driving death from the next."
+              endpointCopy="A life is in the way."
+              endpointTitle="Person"
+              endpointVariant="person"
+              intervalMs={DEATH_INTERVAL_MS}
+              leftCopy="A drunk driver leaves."
+              leftTitle="Bar"
+              overline="Every 42 minutes"
+            />
+          </Stack>
+        </Paper>
+        <Paper sx={{ p: 4 }}>
+          <Stack spacing={3}>
+            <Stack spacing={2}>
+              <Typography
+                sx={{
+                  fontSize: {
+                    xs: "2.25rem",
+                    sm: "2.8rem",
+                    md: "3.15rem"
+                  },
+                  fontWeight: 800,
+                  letterSpacing: "-0.04em",
+                  lineHeight: 0.95,
+                  maxWidth: {
+                    xs: 520,
+                    md: "none"
+                  }
+                }}
+              >
+                Drunk Drivers Get Arrested
+              </Typography>
+              <Typography color="text.secondary">
+                The FBI reported an estimated 804,926 driving-under-the-influence
+                arrests in the United States in 2024.
+              </Typography>
+              <Typography>
+                That works out to roughly one DUI arrest every 39 seconds.
+              </Typography>
+            </Stack>
+            <LinearStatClock
+              description="This track marks the average time between one reported DUI arrest and the next across the United States."
+              endpointCopy="Police make the stop."
+              endpointTitle="Arrest"
+              endpointVariant="police"
+              intervalMs={DUI_ARREST_INTERVAL_MS}
+              leftCopy="An impaired driver is out there."
+              leftTitle="Road"
+              overline="About every 39 seconds"
+            />
           </Stack>
         </Paper>
       </Stack>

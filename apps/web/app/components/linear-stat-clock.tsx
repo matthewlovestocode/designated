@@ -2,20 +2,33 @@
 
 import { useEffect, useState } from "react";
 import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
+import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
 import PersonIcon from "@mui/icons-material/Person";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-const DEATH_INTERVAL_MS = 42 * 60 * 1000;
+type EndpointVariant = "person" | "police";
+
+type LinearStatClockProps = {
+  description: string;
+  endpointCopy: string;
+  endpointTitle: string;
+  endpointVariant: EndpointVariant;
+  intervalMs: number;
+  leftCopy: string;
+  leftTitle: string;
+  overline: string;
+};
+
 const CLOCK_EPOCH_MS = Date.UTC(2025, 0, 1, 0, 0, 0);
 
-function getRemainingMs(now = Date.now()) {
-  const elapsed = (now - CLOCK_EPOCH_MS) % DEATH_INTERVAL_MS;
-  const normalizedElapsed = elapsed < 0 ? elapsed + DEATH_INTERVAL_MS : elapsed;
+function getRemainingMs(intervalMs: number, now = Date.now()) {
+  const elapsed = (now - CLOCK_EPOCH_MS) % intervalMs;
+  const normalizedElapsed = elapsed < 0 ? elapsed + intervalMs : elapsed;
 
-  return DEATH_INTERVAL_MS - normalizedElapsed;
+  return intervalMs - normalizedElapsed;
 }
 
 function formatRemaining(ms: number) {
@@ -26,20 +39,37 @@ function formatRemaining(ms: number) {
   return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
-export default function LinearDeathClock() {
-  const [remainingMs, setRemainingMs] = useState(() => getRemainingMs());
+function EndpointIcon({ variant }: { variant: EndpointVariant }) {
+  if (variant === "police") {
+    return <LocalPoliceIcon />;
+  }
+
+  return <PersonIcon />;
+}
+
+export default function LinearStatClock({
+  description,
+  endpointCopy,
+  endpointTitle,
+  endpointVariant,
+  intervalMs,
+  leftCopy,
+  leftTitle,
+  overline
+}: LinearStatClockProps) {
+  const [remainingMs, setRemainingMs] = useState(() => getRemainingMs(intervalMs));
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      setRemainingMs(getRemainingMs());
+      setRemainingMs(getRemainingMs(intervalMs));
     }, 1000);
 
     return () => {
       window.clearInterval(timer);
     };
-  }, []);
+  }, [intervalMs]);
 
-  const progress = (DEATH_INTERVAL_MS - remainingMs) / DEATH_INTERVAL_MS;
+  const progress = (intervalMs - remainingMs) / intervalMs;
   const clampedProgress = Math.min(Math.max(progress, 0), 1);
 
   return (
@@ -71,11 +101,10 @@ export default function LinearDeathClock() {
         >
           <Stack spacing={0.75} sx={{ maxWidth: 560 }}>
             <Typography sx={{ fontWeight: 700 }} variant="overline">
-              Every 42 minutes
+              {overline}
             </Typography>
             <Typography color="text.secondary" variant="body1">
-              The car moves steadily across the same span of time that separates one
-              alcohol-impaired-driving death from the next.
+              {description}
             </Typography>
           </Stack>
           <Typography
@@ -114,12 +143,12 @@ export default function LinearDeathClock() {
             }
           }}
         >
-          <Stack spacing={0.75} sx={{ minWidth: { md: 120 } }}>
+          <Stack spacing={0.75} sx={{ minWidth: { md: 140 } }}>
             <Typography sx={{ fontWeight: 700 }} variant="body2">
-              Bar
+              {leftTitle}
             </Typography>
             <Typography color="text.secondary" variant="body2">
-              A drunk driver leaves.
+              {leftCopy}
             </Typography>
           </Stack>
 
@@ -195,13 +224,13 @@ export default function LinearDeathClock() {
                 width: "fit-content"
               }}
             >
-              <PersonIcon />
+              <EndpointIcon variant={endpointVariant} />
             </Box>
             <Typography sx={{ fontWeight: 700 }} variant="body2">
-              Person
+              {endpointTitle}
             </Typography>
             <Typography color="text.secondary" variant="body2">
-              A life is in the way.
+              {endpointCopy}
             </Typography>
           </Stack>
         </Box>
