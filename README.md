@@ -56,6 +56,8 @@ From the repository root:
 - `npm run dev` starts the `web` workspace in development mode.
 - `npm run build` builds all configured workspaces.
 - `npm run lint` runs linting for the `web` workspace.
+- `npm test` runs the Vitest suite for the `web` workspace.
+- `npm run coverage` runs the Vitest suite with coverage reporting.
 
 ## Workspace Notes
 

@@ -14,6 +14,7 @@ the files do and how React, Next.js, Material UI, and Supabase fit together.
 - [Page Guides](./pages/README.md): one guide per page and layout file.
 - [Component Guides](./components/README.md): one guide per reusable component.
 - [Theme Provider Guide](./theme-provider.md): how light and dark mode work.
+- [Testing Guide](./testing.md): how Vitest, component tests, and coverage work.
 - [Server Actions Guide](./server-actions.md): what server actions are and how
   Next.js uses them to move work from the browser to the server.
 - [Supabase Setup](./supabase.md): quick-start notes for the current setup.

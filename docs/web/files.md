@@ -146,6 +146,9 @@ Important scripts:
 - `build`: create a production build
 - `start`: run the production server
 - `lint`: run ESLint on the app
+- `test`: run the Vitest suite once
+- `test:watch`: run Vitest in watch mode
+- `coverage`: run Vitest with coverage enabled
 - `make-admin`: run the admin-grant script
 
 Important dependencies:
@@ -153,6 +156,22 @@ Important dependencies:
 - `next`, `react`, `react-dom`
 - `@mui/material`, `@mui/icons-material`, `@mui/material-nextjs`
 - `@supabase/supabase-js`, `@supabase/ssr`
+- `vitest`, `@testing-library/react`, `jsdom`
+
+## `apps/web/vitest.config.ts`
+
+This file configures Vitest for the `web` workspace.
+
+It sets:
+
+- the `jsdom` test environment
+- the test setup file
+- the coverage provider
+- the coverage include/exclude rules
+- the enforced minimum coverage thresholds
+
+There is a dedicated guide for this file in
+[`docs/web/testing.md`](./testing.md).
 
 ## `apps/web/app/layout.tsx`
 

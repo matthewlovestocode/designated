@@ -58,6 +58,8 @@ From the repository root:
 - `npm run dev`: starts the web app in development mode
 - `npm run build`: creates a production build
 - `npm run lint`: checks the web app for common code-quality issues
+- `npm test`: runs the Vitest suite for the web app
+- `npm run coverage`: runs tests with enforced coverage thresholds
 
 From the `web` workspace:
 
@@ -87,6 +89,7 @@ That path shows:
 - how a page is built from smaller components
 - how client-side state works
 - how server-side auth checks work
+- how the project is tested
 
 ## Visual Learning Map
 
