@@ -21,7 +21,7 @@ export default async function PatronRequestPage() {
   const { data: requests } = await supabase
     .from("ride_requests")
     .select(
-      "created_at, id, matched_driver_user_id, notes, pickup_label, pickup_latitude, pickup_longitude, requested_by_role, status"
+      "cancelled_at, claimed_at, completed_at, created_at, id, matched_driver_user_id, notes, pickup_label, pickup_latitude, pickup_longitude, requested_by_role, status"
     )
     .eq("created_by_user_id", user.id)
     .eq("requested_by_role", "patron")

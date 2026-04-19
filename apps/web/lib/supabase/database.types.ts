@@ -53,6 +53,9 @@ export type Database = {
       };
       ride_requests: {
         Row: {
+          cancelled_at: string | null;
+          claimed_at: string | null;
+          completed_at: string | null;
           created_at: string;
           created_by_user_id: string;
           id: string;
@@ -66,6 +69,9 @@ export type Database = {
           updated_at: string;
         };
         Insert: {
+          cancelled_at?: string | null;
+          claimed_at?: string | null;
+          completed_at?: string | null;
           created_at?: string;
           created_by_user_id: string;
           id?: string;
@@ -79,6 +85,9 @@ export type Database = {
           updated_at?: string;
         };
         Update: {
+          cancelled_at?: string | null;
+          claimed_at?: string | null;
+          completed_at?: string | null;
           created_at?: string;
           created_by_user_id?: string;
           id?: string;

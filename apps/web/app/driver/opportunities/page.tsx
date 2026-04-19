@@ -8,6 +8,7 @@ import OpportunitiesMap from "../../components/opportunities-map";
 import PageHeader from "../../components/page-header";
 import RideRequestList from "../../ride-requests/ride-request-list";
 import type { Tables } from "../../../lib/supabase/database.types";
+import { getDistanceMiles } from "../../../lib/driver-availability";
 import { createClient } from "../../../lib/supabase/server";
 
 export default async function DriverOpportunitiesPage() {
@@ -23,7 +24,7 @@ export default async function DriverOpportunitiesPage() {
   const { data: requests } = await supabase
     .from("ride_requests")
     .select(
-      "created_at, id, matched_driver_user_id, notes, pickup_label, pickup_latitude, pickup_longitude, requested_by_role, status"
+      "cancelled_at, claimed_at, completed_at, created_at, id, matched_driver_user_id, notes, pickup_label, pickup_latitude, pickup_longitude, requested_by_role, status"
     )
     .in("status", ["open", "matched"])
     .order("created_at", { ascending: false });
@@ -36,6 +37,9 @@ export default async function DriverOpportunitiesPage() {
   const typedRequests: Array<
     Pick<
       Tables<"ride_requests">,
+      | "cancelled_at"
+      | "claimed_at"
+      | "completed_at"
       | "created_at"
       | "id"
       | "matched_driver_user_id"
@@ -53,7 +57,39 @@ export default async function DriverOpportunitiesPage() {
     (request) =>
       request.status === "matched" && request.matched_driver_user_id === user.id
   );
-  const mapRequests = [...openRequests, ...claimedRequests];
+  const rankedOpenRequests =
+    availability?.is_available && availability.latitude !== null && availability.longitude !== null
+      ? openRequests
+          .map((request) => {
+            const distanceMiles = getDistanceMiles(
+              availability.latitude as number,
+              availability.longitude as number,
+              request.pickup_latitude,
+              request.pickup_longitude
+            );
+            const isInRange = distanceMiles <= (availability.radius_miles ?? 10);
+
+            return {
+              ...request,
+              distanceMiles,
+              isInRange
+            };
+          })
+          .sort((left, right) => {
+            if (left.isInRange !== right.isInRange) {
+              return left.isInRange ? -1 : 1;
+            }
+
+            return left.distanceMiles - right.distanceMiles;
+          })
+      : openRequests.map((request) => ({
+          ...request,
+          distanceMiles: null,
+          isInRange: true
+        }));
+  const visibleOpenRequests = rankedOpenRequests.filter((request) => request.isInRange);
+  const hiddenOutOfRangeCount = rankedOpenRequests.filter((request) => !request.isInRange).length;
+  const mapRequests = [...visibleOpenRequests, ...claimedRequests];
 
   return (
     <DashboardShell>
@@ -71,10 +107,18 @@ export default async function DriverOpportunitiesPage() {
         />
         <Stack spacing={2}>
           <Typography variant="h5">Open Opportunities</Typography>
+          {hiddenOutOfRangeCount ? (
+            <Typography color="text.secondary" variant="body2">
+              {hiddenOutOfRangeCount} open request
+              {hiddenOutOfRangeCount === 1 ? "" : "s"} outside your current
+              coverage radius {hiddenOutOfRangeCount === 1 ? "is" : "are"} hidden for
+              now.
+            </Typography>
+          ) : null}
           <RideRequestList
             currentUserId={user.id}
             emptyMessage="There are no open ride requests right now."
-            requests={openRequests}
+            requests={visibleOpenRequests}
             showClaimAction
           />
         </Stack>

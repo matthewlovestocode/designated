@@ -38,8 +38,30 @@ export async function createRideRequest(input: CreateRideRequestInput) {
   }
 
   const { supabase, user } = await getSignedInUser();
+  const { data: existingRequest, error: existingRequestError } = await supabase
+    .from("ride_requests")
+    .select("id")
+    .eq("created_by_user_id", user.id)
+    .eq("requested_by_role", input.requestedByRole)
+    .in("status", ["open", "matched"])
+    .limit(1)
+    .maybeSingle();
+
+  if (existingRequestError) {
+    throw new Error(existingRequestError.message);
+  }
+
+  if (existingRequest) {
+    throw new Error(
+      "You already have an active ride request. Cancel it or wait for it to finish before creating another one."
+    );
+  }
+
   const timestamp = new Date().toISOString();
   const rideRequest: TablesInsert<"ride_requests"> = {
+    cancelled_at: null,
+    claimed_at: null,
+    completed_at: null,
     created_by_user_id: user.id,
     notes: input.notes.trim() || null,
     pickup_label: input.pickupLabel.trim() || null,
@@ -66,6 +88,7 @@ export async function cancelRideRequest(requestId: string) {
   const { error } = await supabase
     .from("ride_requests")
     .update({
+      cancelled_at: new Date().toISOString(),
       status: "cancelled",
       updated_at: new Date().toISOString()
     })
@@ -109,6 +132,7 @@ export async function claimRideRequest(requestId: string) {
   const { error } = await admin
     .from("ride_requests")
     .update({
+      claimed_at: new Date().toISOString(),
       matched_driver_user_id: user.id,
       status: "matched",
       updated_at: new Date().toISOString()
@@ -138,6 +162,7 @@ export async function completeRideRequest(requestId: string) {
   const { error } = await admin
     .from("ride_requests")
     .update({
+      completed_at: new Date().toISOString(),
       status: "completed",
       updated_at: new Date().toISOString()
     })

@@ -7,6 +7,9 @@ import { cancelRideRequest, claimRideRequest, completeRideRequest } from "./acti
 
 type RideRequest = Pick<
   Tables<"ride_requests">,
+  | "cancelled_at"
+  | "claimed_at"
+  | "completed_at"
   | "created_at"
   | "id"
   | "matched_driver_user_id"
@@ -61,6 +64,21 @@ export default function RideRequestList({
           <Typography color="text.secondary" variant="body2">
             Created {formatTimestamp(request.created_at)} by {request.requested_by_role}.
           </Typography>
+          {request.claimed_at ? (
+            <Typography color="text.secondary" variant="body2">
+              Claimed: {formatTimestamp(request.claimed_at)}
+            </Typography>
+          ) : null}
+          {request.completed_at ? (
+            <Typography color="text.secondary" variant="body2">
+              Completed: {formatTimestamp(request.completed_at)}
+            </Typography>
+          ) : null}
+          {request.cancelled_at ? (
+            <Typography color="text.secondary" variant="body2">
+              Cancelled: {formatTimestamp(request.cancelled_at)}
+            </Typography>
+          ) : null}
           <Stack direction={{ xs: "column", sm: "row" }} spacing={1}>
             <Chip
               color={
